@@ -1,11 +1,5 @@
-README
-======
-
-```
-
 SVERCHOK OPEN3D
-
-```
+===============
 
 This is an addon for [Blender][1], was that extends [Sverchok][2]
 addon. Bringing functionalities from the [Open 3d][7] library.
@@ -21,10 +15,10 @@ Features
 At the moment, this addon includes the following nodes for Sverchok:
 
 * *Point Cloud In*: create Point Cloud from Sverchok Data
-  *Point Cloud Out*: Point Cloud to Sverchok Data
-  *Point Cloud Import*: Import Point Cloud form file
-  *Point Cloud Export*: Export Point Cloud to file
-  *Mesh from Point Cloud*: Creates mesh from PointCloud, offers Alpha Shape, Ball Pivoting and Poisson Reconstruction algorithms
+* *Point Cloud Out*: Point Cloud to Sverchok Data
+* *Point Cloud Import*: Import Point Cloud form file
+* *Point Cloud Export*: Export Point Cloud to file
+* *Mesh from Point Cloud*: Creates mesh from Point Cloud, offers Alpha Shape, Ball Pivoting and Poisson Reconstruction algorithms
 
 There will be more.
 
