@@ -44,26 +44,7 @@ def nodes_index():
                 ("point_cloud.mesh_from_point_cloud", "SvO3MeshFrom3PointCloudNode"),
                 ("point_cloud.point_cloud_export", "SvO3PointCloudExportNode"),
             ]),
-            # ("Extra Curves", [
-            #     ("curve.intersect_surface_plane", "SvExCrossSurfacePlaneNode"),
-            #     ("curve.fourier_curve", "SvFourierCurveNode"),
-            #     ("curve.approximate_fourier_curve", "SvApproxFourierCurveNode"),
-            #     ("curve.interpolate_fourier_curve", "SvInterpFourierCurveNode")
-            # ]),
-            # ("Extra Fields", [
-            #     ("field.vfield_lines_on_surface", "SvExVFieldLinesOnSurfNode")
-            # ]),
-            # ("Extra Solids", [
-            #     ("solid.solid_waffle", "SvSolidWaffleNode")
-            # ]),
-            # ("Extra Spatial", [
-            #     ("spatial.delaunay3d_surface", "SvDelaunayOnSurfaceNode"),
-            #     ("spatial.delaunay_mesh", "SvDelaunayOnMeshNode")
-            # ]),
-            # ("Data", [
-            #     ("data.spreadsheet", "SvSpreadsheetNode"),
-            #     ("data.data_item", "SvDataItemNode")
-            # ])
+
     ]
 
 def make_node_list():
