@@ -1,12 +1,12 @@
 
 bl_info = {
-    "name": "Sverchok-Extra",
-    "author": "Ilya Portnov",
+    "name": "Sverchok-Open3d",
+    "author": "Victor Doval",
     "version": (0, 1, 0, 0),
     "blender": (2, 81, 0),
     "location": "Node Editor",
     "category": "Node",
-    "description": "Sverchok Extra",
+    "description": "Sverchok Open 3d",
     "warning": "",
     "wiki_url": "http://nikitron.cc.ua/sverch/html/main.html",
     "tracker_url": "http://www.blenderartists.org/forum/showthread.php?272679"
@@ -29,45 +29,46 @@ from sverchok.data_structure import updateNode, zip_long_repeat
 from sverchok.utils.logging import info, debug
 
 # make sverchok the root module name, (if sverchok dir not named exactly "sverchok")
-if __name__ != "sverchok_extra":
-    sys.modules["sverchok_extra"] = sys.modules[__name__]
+if __name__ != "sverchok_open3d":
+    sys.modules["sverchok_open3d"] = sys.modules[__name__]
 
-from sverchok_extra import icons
-from sverchok_extra import settings
-from sverchok_extra.utils import show_welcome
+from sverchok_open3d import icons
+from sverchok_open3d import settings
+from sverchok_open3d.utils import show_welcome
 
 def nodes_index():
-    return [("Extra Surfaces", [
-                ("surface.smooth_spline", "SvExBivariateSplineNode"),
-                ("surface.curvature_lines", "SvExSurfaceCurvatureLinesNode"),
-                ("surface.implicit_surface_solver", "SvExImplSurfaceSolverNode"),
-                ("surface.triangular_mesh", "SvExGalGenerateMeshNode")
+    return [("Open 3D", [
+                ("point_cloud.point_cloud_in", "SvO3PointCloudImportNode"),
+                ("point_cloud.point_cloud_import", "SvO3PointCloudInNode"),
+                ("point_cloud.point_cloud_out", "SvO3PointCloudOutNode"),
+                ("point_cloud.mesh_from_point_cloud", "SvO3MeshFrom3PointCloudNode"),
+                ("point_cloud.point_cloud_export", "SvO3PointCloudExportNode"),
             ]),
-            ("Extra Curves", [
-                ("curve.intersect_surface_plane", "SvExCrossSurfacePlaneNode"),
-                ("curve.fourier_curve", "SvFourierCurveNode"),
-                ("curve.approximate_fourier_curve", "SvApproxFourierCurveNode"),
-                ("curve.interpolate_fourier_curve", "SvInterpFourierCurveNode")
-            ]),
-            ("Extra Fields", [
-                ("field.vfield_lines_on_surface", "SvExVFieldLinesOnSurfNode")
-            ]),
-            ("Extra Solids", [
-                ("solid.solid_waffle", "SvSolidWaffleNode")
-            ]),
-            ("Extra Spatial", [
-                ("spatial.delaunay3d_surface", "SvDelaunayOnSurfaceNode"),
-                ("spatial.delaunay_mesh", "SvDelaunayOnMeshNode")
-            ]),
-            ("Data", [
-                ("data.spreadsheet", "SvSpreadsheetNode"),
-                ("data.data_item", "SvDataItemNode")
-            ])
+            # ("Extra Curves", [
+            #     ("curve.intersect_surface_plane", "SvExCrossSurfacePlaneNode"),
+            #     ("curve.fourier_curve", "SvFourierCurveNode"),
+            #     ("curve.approximate_fourier_curve", "SvApproxFourierCurveNode"),
+            #     ("curve.interpolate_fourier_curve", "SvInterpFourierCurveNode")
+            # ]),
+            # ("Extra Fields", [
+            #     ("field.vfield_lines_on_surface", "SvExVFieldLinesOnSurfNode")
+            # ]),
+            # ("Extra Solids", [
+            #     ("solid.solid_waffle", "SvSolidWaffleNode")
+            # ]),
+            # ("Extra Spatial", [
+            #     ("spatial.delaunay3d_surface", "SvDelaunayOnSurfaceNode"),
+            #     ("spatial.delaunay_mesh", "SvDelaunayOnMeshNode")
+            # ]),
+            # ("Data", [
+            #     ("data.spreadsheet", "SvSpreadsheetNode"),
+            #     ("data.data_item", "SvDataItemNode")
+            # ])
     ]
 
 def make_node_list():
     modules = []
-    base_name = "sverchok_extra.nodes"
+    base_name = "sverchok_open3d.nodes"
     index = nodes_index()
     for category, items in index:
         for module_name, node_name in items:
@@ -81,7 +82,7 @@ reload_event = False
 
 if "bpy" in locals():
     reload_event = True
-    info("Reloading sverchok-extra...")
+    info("Reloading sverchok-open3d...")
     reload_modules()
 
 import bpy
@@ -101,7 +102,7 @@ def make_menu():
     menu = []
     index = nodes_index()
     for category, items in index:
-        identifier = "SVERCHOK_EXTRA_" + category.replace(' ', '_')
+        identifier = "SVERCHOK_OPEN3D_" + category.replace(' ', '_')
         node_items = []
         for item in items:
             nodetype = item[1]
@@ -139,36 +140,36 @@ def reload_modules():
 def register():
     global our_menu_classes
 
-    debug("Registering sverchok-extra")
+    debug("Registering sverchok-open3d")
 
     settings.register()
     icons.register()
 
     register_nodes()
-    extra_nodes = importlib.import_module(".nodes", "sverchok_extra")
+    extra_nodes = importlib.import_module(".nodes", "sverchok_open3d")
     auto_gather_node_classes(extra_nodes)
     menu = make_menu()
-    menu_category_provider = SvExCategoryProvider("SVERCHOK_EXTRA", menu)
-    register_extra_category_provider(menu_category_provider) #if 'SVERCHOK_EXTRA' in nodeitems_utils._node_categories:
+    menu_category_provider = SvExCategoryProvider("SVERCHOK_OPEN3D", menu)
+    register_extra_category_provider(menu_category_provider) #if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
         #unregister_node_panels()
-        #nodeitems_utils.unregister_node_categories("SVERCHOK_EXTRA")
+        #nodeitems_utils.unregister_node_categories("SVERCHOK_OPEN3D")
 
     our_menu_classes = make_extra_category_menus()
-    #register_node_panels("SVERCHOK_EXTRA", menu)
+    #register_node_panels("SVERCHOK_OPEN3D", menu)
     show_welcome()
 
 def unregister():
     global our_menu_classes
-    if 'SVERCHOK_EXTRA' in nodeitems_utils._node_categories:
+    if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
         #unregister_node_panels()
-        nodeitems_utils.unregister_node_categories("SVERCHOK_EXTRA")
+        nodeitems_utils.unregister_node_categories("SVERCHOK_OPEN3D")
     for clazz in our_menu_classes:
         try:
             bpy.utils.unregister_class(clazz)
         except Exception as e:
             print("Can't unregister menu class %s" % clazz)
             print(e)
-    unregister_extra_category_provider("SVERCHOK_EXTRA")
+    unregister_extra_category_provider("SVERCHOK_OPEN3D")
     #unregister_node_add_operators()
     unregister_nodes()
 

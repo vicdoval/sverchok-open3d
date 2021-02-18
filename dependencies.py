@@ -19,16 +19,17 @@ try:
     sverchok_d.module = sverchok
     sverchok_d.message =  "Sverchok addon is available"
 except ImportError:
-    message =  "Sverchok addon is not available. Sverchok-Extra will not work."
+    message =  "Sverchok addon is not available. Sverchok-Open3d will not work."
     print(message)
     sverchok = None
 
-pygalmesh_d = ex_dependencies["pygalmesh"] = SvDependency("pygalmesh", "https://github.com/nschloe/pygalmesh")
+opend3D_d = ex_dependencies["open3d"] = SvDependency("open3d", "https://www.freecadweb.org/")
+opend3D_d.pip_installable = True
 try:
-    import pygalmesh
-    pygalmesh_d.message = "Pygalmesh package is available"
-    pygalmesh_d.module = pygalmesh
+    import open3d
+    opend3D_d.message = "open3d package is available"
+    opend3D_d.module = open3d
 except ImportError:
-    pygalmesh_d.message = "Pygalmesh package is not available. Corresponding nodes will not be available"
-    info(pygalmesh_d.message)
-    pygalmesh = None
+    opend3D_d.message = "open3d package is not available, Enhanched KDTree search will not be available"
+    info(opend3D_d.message)
+    open3d = None

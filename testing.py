@@ -7,7 +7,7 @@ from contextlib import contextmanager
 
 import sverchok
 from sverchok.utils.logging import info, debug, error
-import sverchok_extra
+import sverchok_open3d
 
 try:
     import coverage
@@ -31,7 +31,7 @@ def coverage_report():
             cov.html_report()
 
 def get_tests_path():
-    sv_ex_init = sverchok_extra.__file__
+    sv_ex_init = sverchok_open3d.__file__
     return join(dirname(sv_ex_init), "tests")
 
 def run_all_tests(pattern=None):

@@ -20,7 +20,7 @@ class SvExIconProvider(object):
             yield icon_id, os.path.join(icons_dir, icon_file)
 
 def register():
-    register_custom_icon_provider("sverchok_extra", SvExIconProvider())
+    register_custom_icon_provider("sverchok_open3d", SvExIconProvider())
 
 def unregister():
     pass

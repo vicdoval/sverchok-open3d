@@ -9,10 +9,10 @@ from sverchok.utils.modules.eval_formula import get_variables, sv_compile, safe_
 from sverchok.utils.field.scalar import *
 from sverchok.utils.field.vector import *
 
-from sverchok_extra.data.field.scalar import *
-from sverchok_extra.data.field.vector import *
-from sverchok_extra.tests.make_fields import make_vector_field
-from sverchok_extra.tests.make_fields import make_scalar_field
+from sverchok_open3d.data.field.scalar import *
+from sverchok_open3d.data.field.vector import *
+from sverchok_open3d.tests.make_fields import make_vector_field
+from sverchok_open3d.tests.make_fields import make_scalar_field
 
 class MatrixVectorFieldTestCase(SverchokTestCase):
     def test_matrix(self):

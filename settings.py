@@ -1,13 +1,11 @@
 
-import subprocess
-
 import bpy
 from bpy.types import AddonPreferences
 
 PYPATH = bpy.app.binary_path_python
 
 from sverchok.dependencies import draw_message
-from sverchok_extra.dependencies import ex_dependencies, pip, ensurepip
+from sverchok_open3d.dependencies import ex_dependencies, pip, ensurepip
 
 class SvExPreferences(AddonPreferences):
     bl_idname = __package__
@@ -25,7 +23,7 @@ class SvExPreferences(AddonPreferences):
 
         box.label(text="Dependencies:")
         draw_message(box, "sverchok", dependencies=ex_dependencies)
-        draw_message(box, "pygalmesh", dependencies=ex_dependencies)
+        draw_message(box, "open3d", dependencies=ex_dependencies)
 
 def register():
     bpy.utils.register_class(SvExPreferences)

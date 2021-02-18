@@ -6,7 +6,7 @@ import unittest
 from sverchok.utils.testing import SverchokTestCase, link_node_tree, get_node_tree, remove_node_tree
 from sverchok.utils.logging import info, debug, error, exception
 
-from sverchok_extra.testing import get_tests_path
+from sverchok_open3d.testing import get_tests_path
 
 #@unittest.skip
 class ProcessRefsTestCase(SverchokTestCase):
