@@ -1,15 +1,18 @@
 
-import numpy as np
 import os
+import numpy as np
 
 from sverchok.utils.math import inverse, inverse_square, inverse_cubic
 
 def show_welcome():
     text = """
+   +----------------------------+
+   |                            |
+   |     SVERCHOK - OPEN3D      |
+   |                            |
+   +----------------------------+
+   initialized.
 
- <|||   SVERCHOK - OPEN3D    |||>
-
-           initialized.
 """
     can_paint = os.name in {'posix'}
 

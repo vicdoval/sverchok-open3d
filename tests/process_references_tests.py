@@ -14,7 +14,7 @@ class ProcessRefsTestCase(SverchokTestCase):
         refs_path = join(get_tests_path(), "references")
         TREE_NAME = "NodeTree"
         remove_node_tree(TREE_NAME)
-        for blend_path in glob(join(refs_path, "extra_*.blend.gz")):
+        for blend_path in glob(join(refs_path, "o3d_*.zip")):
             info("Testing: %s", blend_path)
             with self.subTest(file = blend_path):
                 try:
@@ -24,4 +24,3 @@ class ProcessRefsTestCase(SverchokTestCase):
                         tree.process()
                 finally:
                     remove_node_tree(TREE_NAME)
-

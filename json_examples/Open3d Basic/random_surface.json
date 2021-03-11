@@ -1,0 +1,300 @@
+{
+  "export_version": "0.10",
+  "framed_nodes": {},
+  "groups": {},
+  "nodes": {
+    "Noise Vector Field": {
+      "bl_idname": "SvExNoiseVectorFieldNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2768.82568359375,
+        -321.1573181152344
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Open3d Transform": {
+      "bl_idname": "SvO3Transform",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true,
+          "nesting_level": 1
+        },
+        "1": {
+          "is_mandatory": true,
+          "nesting_level": 1
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2943.229248046875,
+        -144.7241973876953
+      ],
+      "params": {
+        "coefficient": 0.30000001192092896,
+        "method": "VECTOR_FIELD"
+      },
+      "width": 200.0
+    },
+    "Point Cloud In": {
+      "bl_idname": "SvO3PointCloudInNode",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "2": {
+          "nesting_level": 3
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2023.4951171875,
+        -144.7241973876953
+      ],
+      "params": {
+        "normal_method": "TANGENT",
+        "normal_quality": 3
+      },
+      "width": 200.0
+    },
+    "Triangle Mesh Out": {
+      "bl_idname": "SvO3TriangleMeshOutNode",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        3170.801513671875,
+        -144.7241973876953
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Triangle Mesh Smooth": {
+      "bl_idname": "SvO3TriangleMeshSmoothNode",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "2": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2460.773681640625,
+        -144.7241973876953
+      ],
+      "params": {
+        "iterations": 2,
+        "method": "laplacian"
+      },
+      "width": 200.0
+    },
+    "Triangle Mesh Subdivide": {
+      "bl_idname": "SvO3TriangleMeshSubdivideNode",
+      "custom_socket_props": {
+        "0": {
+          "default_mode": "NONE",
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2713.61376953125,
+        -144.7241973876953
+      ],
+      "params": {
+        "iterations": 2
+      },
+      "width": 200.0
+    },
+    "Triangle Mesh from Point Cloud": {
+      "bl_idname": "SvO3TriangleMeshFromPointCloudNode",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "2": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "4": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "5": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2282.16015625,
+        -144.7241973876953
+      ],
+      "params": {
+        "density_filter": 2.5,
+        "depth": 10
+      },
+      "width": 140.0
+    },
+    "Vector P Field": {
+      "bl_idname": "SvHomogenousVectorField",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1838.3050537109375,
+        -144.7241973876953
+      ],
+      "params": {
+        "randomize_factor": 10.0,
+        "seed": 2,
+        "sizex__": 10.0,
+        "sizey__": 10.0,
+        "sizez__": 10.0,
+        "xdim__": 10,
+        "ydim__": 10,
+        "zdim__": 10
+      },
+      "width": 140.0
+    },
+    "Viewer Draw": {
+      "bl_idname": "SvViewerDrawMk4",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        3348.814697265625,
+        -144.7241973876953
+      ],
+      "params": {
+        "color_per_point": true,
+        "color_per_polygon": true,
+        "display_edges": false,
+        "polygon_use_vertex_color": true,
+        "selected_draw_mode": "facet"
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    }
+  },
+  "update_lists": [
+    [
+      "Point Cloud In",
+      0,
+      "Triangle Mesh from Point Cloud",
+      0
+    ],
+    [
+      "Vector P Field",
+      0,
+      "Point Cloud In",
+      0
+    ],
+    [
+      "Triangle Mesh from Point Cloud",
+      0,
+      "Triangle Mesh Smooth",
+      0
+    ],
+    [
+      "Triangle Mesh Smooth",
+      0,
+      "Triangle Mesh Subdivide",
+      0
+    ],
+    [
+      "Triangle Mesh Subdivide",
+      0,
+      "Open3d Transform",
+      0
+    ],
+    [
+      "Noise Vector Field",
+      0,
+      "Open3d Transform",
+      1
+    ],
+    [
+      "Open3d Transform",
+      0,
+      "Triangle Mesh Out",
+      0
+    ],
+    [
+      "Triangle Mesh Out",
+      0,
+      "Viewer Draw",
+      0
+    ],
+    [
+      "Triangle Mesh Out",
+      1,
+      "Viewer Draw",
+      1
+    ],
+    [
+      "Triangle Mesh Out",
+      2,
+      "Viewer Draw",
+      2
+    ],
+    [
+      "Triangle Mesh Out",
+      3,
+      "Viewer Draw",
+      4
+    ]
+  ]
+}

@@ -8,13 +8,13 @@ bl_info = {
     "category": "Node",
     "description": "Sverchok Open 3d",
     "warning": "",
-    "wiki_url": "http://nikitron.cc.ua/sverch/html/main.html",
-    "tracker_url": "http://www.blenderartists.org/forum/showthread.php?272679"
+    "wiki_url": "https://github.com/vicdoval/sverchok-open3d",
+    "tracker_url": "https://github.com/vicdoval/sverchok-open3d/issues"
 }
 
 import sys
 import importlib
-
+from pathlib import Path
 import nodeitems_utils
 import bl_operators
 
@@ -23,7 +23,7 @@ from sverchok.core import sv_registration_utils, make_node_list
 from sverchok.utils import auto_gather_node_classes, get_node_class_reference
 from sverchok.menu import SverchNodeItem, node_add_operators, SverchNodeCategory, register_node_panels, unregister_node_panels, unregister_node_add_operators
 from sverchok.utils.extra_categories import register_extra_category_provider, unregister_extra_category_provider
-from sverchok.ui.nodeview_space_menu import make_extra_category_menus
+from sverchok.ui.nodeview_space_menu import make_extra_category_menus, layout_draw_categories
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat
 from sverchok.utils.logging import info, debug
@@ -32,20 +32,13 @@ from sverchok.utils.logging import info, debug
 if __name__ != "sverchok_open3d":
     sys.modules["sverchok_open3d"] = sys.modules[__name__]
 
-from sverchok_open3d import icons
-from sverchok_open3d import settings
+import sverchok_open3d
+from sverchok_open3d import icons, settings, sockets, examples, menu
+from sverchok_open3d.nodes_index import nodes_index
 from sverchok_open3d.utils import show_welcome
 
-def nodes_index():
-    return [("Open 3D", [
-                ("point_cloud.point_cloud_in", "SvO3PointCloudImportNode"),
-                ("point_cloud.point_cloud_import", "SvO3PointCloudInNode"),
-                ("point_cloud.point_cloud_out", "SvO3PointCloudOutNode"),
-                ("point_cloud.mesh_from_point_cloud", "SvO3MeshFrom3PointCloudNode"),
-                ("point_cloud.point_cloud_export", "SvO3PointCloudExportNode"),
-            ]),
-
-    ]
+DOCS_LINK = 'https://github.com/vicdoval/sverchok-open3d/tree/master/utils'
+MODULE_NAME = 'open3d'
 
 def make_node_list():
     modules = []
@@ -53,10 +46,21 @@ def make_node_list():
     index = nodes_index()
     for category, items in index:
         for module_name, node_name in items:
+            if node_name == 'separator':
+                continue
             module = importlib.import_module(f".{module_name}", base_name)
             modules.append(module)
     return modules
 
+def plain_node_list():
+    node_cats = {}
+    index = nodes_index()
+    for category, items in index:
+        nodes = []
+        for _, node_name in items:
+            nodes.append([node_name])
+        node_cats[category] = nodes
+    return node_cats
 imported_modules = [icons] + make_node_list()
 
 reload_event = False
@@ -80,7 +84,7 @@ def unregister_nodes():
         module.unregister()
 
 def make_menu():
-    menu = []
+    menu_cats = []
     index = nodes_index()
     for category, items in index:
         identifier = "SVERCHOK_OPEN3D_" + category.replace(' ', '_')
@@ -88,7 +92,7 @@ def make_menu():
         for item in items:
             nodetype = item[1]
             rna = get_node_class_reference(nodetype)
-            if not rna:
+            if not rna and nodetype != 'separator':
                 info("Node `%s' is not available (probably due to missing dependencies).", nodetype)
             else:
                 node_item = SverchNodeItem.new(nodetype)
@@ -99,13 +103,54 @@ def make_menu():
                         category,
                         items=node_items
                     )
-            menu.append(cat)
-    return menu
+            menu_cats.append(cat)
+    return menu_cats
 
-class SvExCategoryProvider(object):
-    def __init__(self, identifier, menu):
+def add_nodes_to_sv():
+    index = nodes_index()
+    for _, items in index:
+        for item in items:
+            nodetype = item[1]
+            rna = get_node_class_reference(nodetype)
+            if not rna and nodetype != 'separator':
+                info("Node `%s' is not available (probably due to missing dependencies).", nodetype)
+            else:
+                SverchNodeItem.new(nodetype)
+
+
+
+node_cats = plain_node_list()
+
+class NODEVIEW_MT_Open3Dx(bpy.types.Menu):
+    bl_label = "Open3D"
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout_draw_categories(self.layout, self.bl_label, node_cats['Utils'])
+        layout.menu("NODEVIEW_MT_Open3DPointCloudMenu")
+        layout.menu("NODEVIEW_MT_Open3DTriangleMeshMenu")
+
+
+# does not get registered
+class NodeViewMenuTemplate(bpy.types.Menu):
+    bl_label = ""
+
+    def draw(self, context):
+        layout_draw_categories(self.layout, self.bl_label, node_cats[self.bl_label])
+
+def make_class(name, bl_label):
+    name = 'NODEVIEW_MT_Open3D' + name + 'Menu'
+    clazz = type(name, (NodeViewMenuTemplate,), {'bl_label': bl_label})
+    return clazz
+
+class SvO3CategoryProvider(object):
+    def __init__(self, identifier, cats_menu, docs_link, use_custom_menu=False, custom_menu=None):
         self.identifier = identifier
-        self.menu = menu
+        self.menu = cats_menu
+        self.docs = docs_link
+        self.use_custom_menu = use_custom_menu
+        self.custom_menu = custom_menu
 
     def get_categories(self):
         return self.menu
@@ -118,6 +163,11 @@ def reload_modules():
         debug("Reloading: %s", im)
         importlib.reload(im)
 
+menu_classes = [
+    make_class('PointCloud', 'Point Cloud'),
+    make_class('TriangleMesh', 'Triangle Mesh')
+    ]
+
 def register():
     global our_menu_classes
 
@@ -125,18 +175,25 @@ def register():
 
     settings.register()
     icons.register()
+    sockets.register()
 
     register_nodes()
     extra_nodes = importlib.import_module(".nodes", "sverchok_open3d")
     auto_gather_node_classes(extra_nodes)
-    menu = make_menu()
-    menu_category_provider = SvExCategoryProvider("SVERCHOK_OPEN3D", menu)
-    register_extra_category_provider(menu_category_provider) #if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
-        #unregister_node_panels()
-        #nodeitems_utils.unregister_node_categories("SVERCHOK_OPEN3D")
 
-    our_menu_classes = make_extra_category_menus()
-    #register_node_panels("SVERCHOK_OPEN3D", menu)
+    add_nodes_to_sv()
+    menu.register()
+
+    cats_menu = []
+    cats_menu = make_menu() # This would load every sverchok-open3d category straight in the Sv menu
+
+    menu_category_provider = SvO3CategoryProvider("SVERCHOK_OPEN3D", cats_menu, DOCS_LINK, use_custom_menu=True, custom_menu='NODEVIEW_MT_Open3Dx')
+    register_extra_category_provider(menu_category_provider) #if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
+    examples.register()
+
+    # with make_menu() This would load every sverchok-open3d category straight in the Sv menu
+    # our_menu_classes = make_extra_category_menus()
+
     show_welcome()
 
 def unregister():
@@ -153,6 +210,11 @@ def unregister():
     unregister_extra_category_provider("SVERCHOK_OPEN3D")
     #unregister_node_add_operators()
     unregister_nodes()
+    menu.unregister()
+    # for class_name in menu_classes:
+    #     bpy.utils.unregister_class(class_name)
+    # bpy.utils.unregister_class(NODEVIEW_MT_Open3Dx)
 
     icons.unregister()
+    sockets.unregister()
     settings.unregister()

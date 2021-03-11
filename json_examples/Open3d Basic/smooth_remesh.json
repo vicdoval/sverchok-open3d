@@ -1,0 +1,532 @@
+{
+  "export_version": "0.10",
+  "framed_nodes": {},
+  "groups": {},
+  "nodes": {
+    "A Number": {
+      "bl_idname": "SvNumberNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2111.14306640625,
+        -342.5318908691406
+      ],
+      "params": {
+        "float_": 0.14999999105930328
+      },
+      "width": 140.0
+    },
+    "Box": {
+      "bl_idname": "SvBoxNodeMk2",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        122.37222290039062,
+        -91.0015869140625
+      ],
+      "params": {
+        "Size": 2.379999876022339,
+        "origin": "BOTTOM"
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Dual Mesh": {
+      "bl_idname": "SvDualMeshNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2671.77197265625,
+        -50.98150634765625
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "List Input": {
+      "bl_idname": "SvListInputNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -317.6277770996094,
+        -16.09518051147461
+      ],
+      "params": {
+        "float_list": [
+          2.6499998569488525,
+          3.240000009536743,
+          4.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "int_": 3,
+        "mode": "float_list"
+      },
+      "width": 140.0
+    },
+    "List Item": {
+      "bl_idname": "SvListItemNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1459.105224609375,
+        -60.09832763671875
+      ],
+      "params": {
+        "level": 1
+      },
+      "width": 140.0
+    },
+    "List Split": {
+      "bl_idname": "SvListSplitNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -97.62777709960938,
+        -25.147254943847656
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Mesh Join": {
+      "bl_idname": "SvMeshJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        295.9872131347656,
+        -94.06480407714844
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Open3d Transform": {
+      "bl_idname": "SvO3Transform",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2269.091552734375,
+        -51.744842529296875
+      ],
+      "params": {},
+      "width": 200.0
+    },
+    "Random Vector": {
+      "bl_idname": "RandomVectorNodeMK3",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -316.38323974609375,
+        -230.2130584716797
+      ],
+      "params": {
+        "count_inner": 3,
+        "scale": 2.440000057220459,
+        "seed": 7
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Triangle Mesh Clean": {
+      "bl_idname": "SvO3TriangleMeshCleanNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2065.3291015625,
+        -52.36927795410156
+      ],
+      "params": {
+        "remove_unreferenced_vertices": true
+      },
+      "width": 180.0
+    },
+    "Triangle Mesh In": {
+      "bl_idname": "SvO3TriangleMeshInNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        685.5255737304688,
+        -60.84877395629883
+      ],
+      "params": {},
+      "width": 200.0
+    },
+    "Triangle Mesh Out": {
+      "bl_idname": "SvO3TriangleMeshOutNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2494.083251953125,
+        -51.60306930541992
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Triangle Mesh Sampling": {
+      "bl_idname": "SvO3TriangleMeshSamplingNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        907.513916015625,
+        -57.81175231933594
+      ],
+      "params": {
+        "num_points": 600
+      },
+      "width": 140.0
+    },
+    "Triangle Mesh Separate Loose": {
+      "bl_idname": "SvO3TriangleMeshSeparateNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1239.5914306640625,
+        -57.845245361328125
+      ],
+      "params": {},
+      "width": 200.0
+    },
+    "Triangle Mesh Simplify": {
+      "bl_idname": "SvO3TriangleMeshSimplifyNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1618.661376953125,
+        -58.832000732421875
+      ],
+      "params": {
+        "target_number_of_triangles": 1000,
+        "voxel_size": 0.04000002145767212
+      },
+      "width": 200.0
+    },
+    "Triangle Mesh Smooth": {
+      "bl_idname": "SvO3TriangleMeshSmoothNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1842.750732421875,
+        -56.11126708984375
+      ],
+      "params": {
+        "iterations": 4
+      },
+      "width": 200.0
+    },
+    "Triangle Mesh from Point Cloud": {
+      "bl_idname": "SvO3TriangleMeshFromPointCloudNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1066.11376953125,
+        -57.81175994873047
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Triangulate mesh": {
+      "bl_idname": "SvTriangulateNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        513.4957275390625,
+        -71.39469909667969
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Vector Rewire": {
+      "bl_idname": "SvVectorRewire",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -137.90921020507812,
+        -241.1043243408203
+      ],
+      "params": {
+        "selected_mode_from": "Scalar"
+      },
+      "width": 140.0
+    },
+    "Viewer Draw": {
+      "bl_idname": "SvViewerDrawMk4",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        503.6293640136719,
+        209.7553253173828
+      ],
+      "params": {
+        "display_faces": false
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Viewer Draw.001": {
+      "bl_idname": "SvViewerDrawMk4",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2867.59423828125,
+        -22.486074447631836
+      ],
+      "params": {
+        "display_verts": false,
+        "selected_draw_mode": "facet"
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    }
+  },
+  "update_lists": [
+    [
+      "Box",
+      0,
+      "Viewer Draw",
+      0
+    ],
+    [
+      "Box",
+      1,
+      "Viewer Draw",
+      1
+    ],
+    [
+      "Box",
+      2,
+      "Viewer Draw",
+      2
+    ],
+    [
+      "Box",
+      0,
+      "Mesh Join",
+      0
+    ],
+    [
+      "Box",
+      2,
+      "Mesh Join",
+      1
+    ],
+    [
+      "List Split",
+      0,
+      "Box",
+      0
+    ],
+    [
+      "Vector Rewire",
+      0,
+      "Box",
+      4
+    ],
+    [
+      "Mesh Join",
+      0,
+      "Triangulate mesh",
+      0
+    ],
+    [
+      "Mesh Join",
+      1,
+      "Triangulate mesh",
+      2
+    ],
+    [
+      "Triangulate mesh",
+      0,
+      "Triangle Mesh In",
+      1
+    ],
+    [
+      "Triangulate mesh",
+      2,
+      "Triangle Mesh In",
+      4
+    ],
+    [
+      "Triangle Mesh In",
+      0,
+      "Triangle Mesh Sampling",
+      0
+    ],
+    [
+      "Triangle Mesh Sampling",
+      0,
+      "Triangle Mesh from Point Cloud",
+      0
+    ],
+    [
+      "Triangle Mesh from Point Cloud",
+      0,
+      "Triangle Mesh Separate Loose",
+      0
+    ],
+    [
+      "Triangle Mesh Simplify",
+      0,
+      "Triangle Mesh Smooth",
+      0
+    ],
+    [
+      "Triangle Mesh Separate Loose",
+      0,
+      "List Item",
+      0
+    ],
+    [
+      "List Item",
+      0,
+      "Triangle Mesh Simplify",
+      0
+    ],
+    [
+      "Random Vector",
+      0,
+      "Vector Rewire",
+      0
+    ],
+    [
+      "List Input",
+      0,
+      "List Split",
+      0
+    ],
+    [
+      "Triangle Mesh Smooth",
+      0,
+      "Triangle Mesh Clean",
+      0
+    ],
+    [
+      "Triangle Mesh Clean",
+      0,
+      "Open3d Transform",
+      0
+    ],
+    [
+      "A Number",
+      0,
+      "Open3d Transform",
+      1
+    ],
+    [
+      "Open3d Transform",
+      0,
+      "Triangle Mesh Out",
+      0
+    ],
+    [
+      "Triangle Mesh Out",
+      0,
+      "Dual Mesh",
+      0
+    ],
+    [
+      "Triangle Mesh Out",
+      2,
+      "Dual Mesh",
+      2
+    ],
+    [
+      "Dual Mesh",
+      0,
+      "Viewer Draw.001",
+      0
+    ],
+    [
+      "Dual Mesh",
+      1,
+      "Viewer Draw.001",
+      2
+    ]
+  ]
+}

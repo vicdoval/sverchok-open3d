@@ -1,0 +1,788 @@
+{
+  "export_version": "0.10",
+  "framed_nodes": {},
+  "groups": {},
+  "nodes": {
+    "A Number": {
+      "bl_idname": "SvNumberNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        759.2305908203125,
+        -1438.0396728515625
+      ],
+      "params": {
+        "int_": 6,
+        "selected_mode": "int"
+      },
+      "width": 140.0
+    },
+    "Box": {
+      "bl_idname": "SvBoxNodeMk2",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        93.20923614501953,
+        -240.3943634033203
+      ],
+      "params": {
+        "Divz": 20,
+        "origin": "BOTTOM"
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Line": {
+      "bl_idname": "SvLineNodeMK4",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1177.0020751953125,
+        595.6451416015625
+      ],
+      "params": {},
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Line.001": {
+      "bl_idname": "SvLineNodeMK4",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1065.8084716796875,
+        -1129.5799560546875
+      ],
+      "params": {
+        "center": true,
+        "direction": "Y",
+        "num": 4,
+        "size": 24.559999465942383
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Line.002": {
+      "bl_idname": "SvLineNodeMK4",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {
+        "3": {
+          "expanded": true
+        },
+        "4": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1077.2666015625,
+        -1469.47265625
+      ],
+      "params": {
+        "center": true,
+        "direction": "OD",
+        "num": 4,
+        "size": 36.939998626708984,
+        "v3_dir": [
+          0.44999998807907104,
+          1.0,
+          0.0
+        ],
+        "v3_origin": [
+          13.149999618530273,
+          0.0,
+          0.0
+        ]
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "List Item": {
+      "bl_idname": "SvListItemNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1242.980224609375,
+        -657.67138671875
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "List Item.002": {
+      "bl_idname": "SvListItemNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1249.8748779296875,
+        -888.816162109375
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "List Join": {
+      "bl_idname": "ListJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1730.25390625,
+        -995.018310546875
+      ],
+      "params": {
+        "JoinLevel": 2,
+        "match_and_join": true
+      },
+      "width": 140.0
+    },
+    "List Join.001": {
+      "bl_idname": "ListJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1490.363525390625,
+        -493.9936828613281
+      ],
+      "params": {
+        "JoinLevel": 2
+      },
+      "width": 140.0
+    },
+    "List Length": {
+      "bl_idname": "ListLengthNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        619.7235717773438,
+        -764.9765625
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Matrix Apply (verts)": {
+      "bl_idname": "MatrixApplyNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1528.5321044921875,
+        -1139.7606201171875
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Matrix Apply (verts).001": {
+      "bl_idname": "MatrixApplyNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1528.5321044921875,
+        -1004.818603515625
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Matrix In.001": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        },
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1273.7177734375,
+        -1411.1580810546875
+      ],
+      "params": {
+        "angle_y": 180.0,
+        "location_": [
+          10.619999885559082,
+          -8.760000228881836,
+          0.0
+        ],
+        "rotation_mode": "EULER",
+        "scale": [
+          2.919999837875366,
+          1.5099999904632568,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.002": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        },
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1265.9971923828125,
+        -1068.369873046875
+      ],
+      "params": {
+        "rotation_mode": "EULER",
+        "scale": [
+          3.0,
+          1.5,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.003": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -81.96221923828125,
+        -413.96923828125
+      ],
+      "params": {
+        "scale": [
+          0.9000000953674316,
+          2.7300000190734863,
+          20.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Number Range": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "stop"
+        },
+        "2": {
+          "label": "step"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        812.1292724609375,
+        -759.08740234375
+      ],
+      "params": {
+        "current_mode": "RANGE",
+        "number_mode": "int"
+      },
+      "width": 140.0
+    },
+    "Number Range.001": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "step"
+        },
+        "2": {
+          "label": "count"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        797.360595703125,
+        -950.7943115234375
+      ],
+      "params": {
+        "count_": 4,
+        "current_mode": "RANGE_STEP",
+        "number_mode": "int",
+        "range_mode": "RANGE_STEP",
+        "start_int": -4,
+        "stop_int": 0
+      },
+      "width": 140.0
+    },
+    "Number Range.002": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "stop"
+        },
+        "2": {
+          "label": "step"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        809.8615112304688,
+        -553.9326782226562
+      ],
+      "params": {
+        "current_mode": "RANGE",
+        "number_mode": "int",
+        "stop_int": 4
+      },
+      "width": 140.0
+    },
+    "Number Range.003": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "stop"
+        },
+        "2": {
+          "label": "count"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -407.2784729003906,
+        -521.793212890625
+      ],
+      "params": {
+        "count_": 5,
+        "current_mode": "RANGE_COUNT",
+        "range_mode": "RANGE_COUNT",
+        "start_float": 40.0,
+        "stop_float": 30.0
+      },
+      "width": 140.0
+    },
+    "Triangle Mesh Deform as Rigid": {
+      "bl_idname": "SvO3TriangleMeshDeformAsRigidNode",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "is_mandatory": true
+        },
+        "2": {
+          "is_mandatory": true
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "4": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2007.0401611328125,
+        -333.0303955078125
+      ],
+      "params": {
+        "energy_mode": "SMOOTHED",
+        "max_iterations": 500,
+        "smoothed_alpha": 0.0010000000474974513
+      },
+      "width": 200.0
+    },
+    "Triangle Mesh In": {
+      "bl_idname": "SvO3TriangleMeshInNode",
+      "custom_socket_props": {
+        "3": {
+          "nesting_level": 3
+        },
+        "4": {
+          "nesting_level": 3
+        },
+        "7": {
+          "nesting_level": 3
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1489.08349609375,
+        -181.58743286132812
+      ],
+      "params": {},
+      "width": 145.47763061523438
+    },
+    "Triangle Mesh Out": {
+      "bl_idname": "SvO3TriangleMeshOutNode",
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2324.89794921875,
+        -124.322021484375
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Triangulate mesh": {
+      "bl_idname": "SvTriangulateNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        288.7315673828125,
+        -353.0426330566406
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Vector in": {
+      "bl_idname": "GenVectorsNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1091.729248046875,
+        -1348.55810546875
+      ],
+      "params": {
+        "x_": 3.0,
+        "y_": 1.5,
+        "z_": 1.0
+      },
+      "width": 100.0
+    },
+    "Vector in.001": {
+      "bl_idname": "GenVectorsNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -223.5975799560547,
+        -413.1258544921875
+      ],
+      "params": {
+        "x_": 1.0,
+        "y_": 2.700000047683716,
+        "z_": 30.0
+      },
+      "width": 100.0
+    },
+    "Viewer Draw": {
+      "bl_idname": "SvViewerDrawMk4",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        330.7414245605469,
+        70.39427185058594
+      ],
+      "params": {
+        "activate": false
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Viewer Draw.001": {
+      "bl_idname": "SvViewerDrawMk4",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2585.875,
+        -38.962032318115234
+      ],
+      "params": {},
+      "use_custom_color": true,
+      "width": 140.0
+    }
+  },
+  "update_lists": [
+    [
+      "Line.001",
+      0,
+      "Matrix In.002",
+      0
+    ],
+    [
+      "A Number",
+      0,
+      "Line.001",
+      0
+    ],
+    [
+      "A Number",
+      0,
+      "Line.002",
+      0
+    ],
+    [
+      "Line.002",
+      0,
+      "Matrix In.001",
+      0
+    ],
+    [
+      "Vector in",
+      0,
+      "Matrix In.001",
+      1
+    ],
+    [
+      "Box",
+      0,
+      "Viewer Draw",
+      0
+    ],
+    [
+      "Box",
+      1,
+      "Viewer Draw",
+      1
+    ],
+    [
+      "Box",
+      2,
+      "Viewer Draw",
+      2
+    ],
+    [
+      "Matrix In.003",
+      0,
+      "Box",
+      4
+    ],
+    [
+      "Triangle Mesh In",
+      0,
+      "Triangle Mesh Deform as Rigid",
+      0
+    ],
+    [
+      "List Join.001",
+      0,
+      "Triangle Mesh Deform as Rigid",
+      1
+    ],
+    [
+      "List Join",
+      0,
+      "Triangle Mesh Deform as Rigid",
+      2
+    ],
+    [
+      "Box",
+      0,
+      "Triangulate mesh",
+      0
+    ],
+    [
+      "Box",
+      1,
+      "Triangulate mesh",
+      1
+    ],
+    [
+      "Box",
+      2,
+      "Triangulate mesh",
+      2
+    ],
+    [
+      "List Length",
+      0,
+      "Number Range",
+      1
+    ],
+    [
+      "Triangulate mesh",
+      0,
+      "List Length",
+      0
+    ],
+    [
+      "Number Range",
+      0,
+      "List Item",
+      0
+    ],
+    [
+      "Number Range.001",
+      0,
+      "List Item",
+      1
+    ],
+    [
+      "Matrix Apply (verts).001",
+      0,
+      "List Join",
+      0
+    ],
+    [
+      "Matrix Apply (verts)",
+      0,
+      "List Join",
+      1
+    ],
+    [
+      "Triangulate mesh",
+      0,
+      "List Item.002",
+      0
+    ],
+    [
+      "Number Range.002",
+      0,
+      "List Item.002",
+      1
+    ],
+    [
+      "Triangulate mesh",
+      0,
+      "Triangle Mesh In",
+      1
+    ],
+    [
+      "Triangulate mesh",
+      2,
+      "Triangle Mesh In",
+      4
+    ],
+    [
+      "Triangle Mesh Out",
+      0,
+      "Viewer Draw.001",
+      0
+    ],
+    [
+      "Triangle Mesh Out",
+      2,
+      "Viewer Draw.001",
+      2
+    ],
+    [
+      "Triangle Mesh Deform as Rigid",
+      0,
+      "Triangle Mesh Out",
+      0
+    ],
+    [
+      "List Item.002",
+      0,
+      "Matrix Apply (verts).001",
+      0
+    ],
+    [
+      "Matrix In.002",
+      0,
+      "Matrix Apply (verts).001",
+      1
+    ],
+    [
+      "List Item.002",
+      0,
+      "Matrix Apply (verts)",
+      0
+    ],
+    [
+      "Matrix In.001",
+      0,
+      "Matrix Apply (verts)",
+      1
+    ],
+    [
+      "Number Range.002",
+      0,
+      "List Join.001",
+      0
+    ],
+    [
+      "List Item",
+      0,
+      "List Join.001",
+      1
+    ],
+    [
+      "Vector in.001",
+      0,
+      "Matrix In.003",
+      1
+    ],
+    [
+      "Number Range.003",
+      0,
+      "Vector in.001",
+      2
+    ]
+  ]
+}
