@@ -10,8 +10,12 @@ from sverchok.data_structure import (
     SIMPLE_DATA_TYPES,
     flatten_data, graft_data, map_at_level, wrap_data, unwrap_data)
 from sverchok_open3d.dependencies import open3d as o3d
-TriangleMesh = o3d.cpu.pybind.geometry.TriangleMesh
-PointCloud = o3d.cpu.pybind.geometry.PointCloud
+if o3d is not None:
+    TriangleMesh = o3d.cpu.pybind.geometry.TriangleMesh
+    PointCloud = o3d.cpu.pybind.geometry.PointCloud
+else:
+    TriangleMesh = None
+    PointCloud = None
 class SvO3PointCloudSocket(NodeSocket, SvSocketCommon):
     '''For Opend 3d Point Cloud data'''
     bl_idname = "SvO3PointCloudSocket"
