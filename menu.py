@@ -1,6 +1,7 @@
 import bpy
 from sverchok.ui.nodeview_space_menu import make_extra_category_menus, layout_draw_categories
 from sverchok_open3d.nodes_index import nodes_index
+from sverchok_open3d.dependencies import open3d as o3d
 
 def plain_node_list():
     node_categories = {}
@@ -20,9 +21,10 @@ class NODEVIEW_MT_Open3Dx(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         layout.operator_context = 'INVOKE_REGION_WIN'
-        layout_draw_categories(self.layout, self.bl_label, node_cats['Utils'])
-        layout.menu("NODEVIEW_MT_Open3DPointCloudMenu")
-        layout.menu("NODEVIEW_MT_Open3DTriangleMeshMenu")
+        if o3d is not None:
+            layout_draw_categories(self.layout, self.bl_label, node_cats['Utils'])
+            layout.menu("NODEVIEW_MT_Open3DPointCloudMenu")
+            layout.menu("NODEVIEW_MT_Open3DTriangleMeshMenu")
 
 # does not get registered
 class NodeViewMenuTemplate(bpy.types.Menu):
