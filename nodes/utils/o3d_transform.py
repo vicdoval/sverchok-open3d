@@ -176,7 +176,7 @@ else:
                 self.inputs['Transformation'].nesting_level = 1
 
         def process_data(self, params):
-
+            mesh_out = []
             transformation_mode = self.method
             geometry_type = type(params[0][0])
 
