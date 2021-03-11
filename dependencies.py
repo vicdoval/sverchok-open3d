@@ -30,6 +30,6 @@ try:
     opend3D_d.message = "open3d package is available"
     opend3D_d.module = open3d
 except ImportError:
-    opend3D_d.message = "open3d package is not available, Enhanched KDTree search will not be available"
+    opend3D_d.message = "open3d package is not available, the addon will not work"
     info(opend3D_d.message)
     open3d = None
