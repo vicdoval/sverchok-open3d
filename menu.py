@@ -21,7 +21,10 @@ class NODEVIEW_MT_Open3Dx(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         layout.operator_context = 'INVOKE_REGION_WIN'
-        if o3d is not None:
+        if o3d is None:
+
+            layout.operator('node.sv_ex_pip_install', text="Install with Open3d with PIP").package = "open3d"
+        else:
             layout_draw_categories(self.layout, self.bl_label, node_cats['Utils'])
             layout.menu("NODEVIEW_MT_Open3DPointCloudMenu")
             layout.menu("NODEVIEW_MT_Open3DTriangleMeshMenu")
