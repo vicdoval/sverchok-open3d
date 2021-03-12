@@ -7,14 +7,12 @@ from mathutils import Matrix
 import copy
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
-from sverchok.data_structure import updateNode, zip_long_repeat, fullList
-from sverchok.utils.logging import info, exception
+from sverchok.data_structure import updateNode
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
+from sverchok.utils.dummy_nodes import add_dummy
 
-import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
 from sverchok_open3d.utils.triangle_mesh import clean_doubled_faces
-from sverchok.utils.dummy_nodes import add_dummy
 
 if o3d is None:
     add_dummy('SvO3TriangleMeshCleanNode', 'Triangle Mesh Clean', 'open3d')
@@ -82,12 +80,9 @@ else:
             layout.prop(self, 'remove_unreferenced_vertices')
 
         def draw_buttons_ext(self, context, layout):
-
             self.draw_buttons(context, layout)
 
-
         def process_data(self, params):
-
 
             mesh_out = []
 

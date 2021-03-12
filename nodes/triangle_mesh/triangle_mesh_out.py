@@ -28,7 +28,6 @@ else:
         bl_idname = 'SvO3TriangleMeshOutNode'
         bl_label = 'Triangle Mesh Out'
         bl_icon = 'MESH_DATA'
-        # sv_icon = 'SV_RANDOM_NUM_GEN'
 
         default_np = (False for i in range(10))
         out_np: BoolVectorProperty(
@@ -51,15 +50,12 @@ else:
             self.outputs.new('SvStringsSocket', "Material Id")
 
 
-
         def draw_buttons_ext(self, context, layout):
-            layout.prop(self, 'list_match')
             layout.label(text="Ouput Numpy:")
             r = layout.column()
             for i in range(len(self.outputs)):
                 r.prop(self, "out_np", index=i, text=self.outputs[i].name, toggle=True)
-        def rclick_menu(self, context, layout):
-            layout.prop_menu_enum(self, "list_match", text="List Match")
+
         def process_data(self, params):
             outputs = self.outputs
 

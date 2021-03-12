@@ -3,8 +3,8 @@ import numpy as np
 def clean_doubled_faces(trimesh):
     faces_o = np.sort(trimesh.triangles)
     _, idx = np.unique(faces_o, axis=0, return_index=True)
-    print(len(idx))
-    mask = np.ones(len(faces_o),dtype=int)
+
+    mask = np.ones(len(faces_o), dtype=int)
     mask[idx]=0
     trimesh.remove_triangles_by_mask(mask)
 
@@ -16,10 +16,11 @@ def clean_doubled_faces2(faces):
 def normalize_v3(arr):
     ''' Normalize a numpy array of 3 component vectors shape=(n,3) '''
     lens = np.sqrt( arr[:,0]**2 + arr[:,1]**2 + arr[:,2]**2 )
-    arr[:,0] /= lens
-    arr[:,1] /= lens
-    arr[:,2] /= lens
+    arr[:, 0] /= lens
+    arr[:, 1] /= lens
+    arr[:, 2] /= lens
     return arr
+
 def calc_normals(triangle_mesh, v_normals=True, output_numpy=True, as_array=False):
     if as_array:
         np_verts, np_faces = triangle_mesh
@@ -41,6 +42,7 @@ def calc_normals(triangle_mesh, v_normals=True, output_numpy=True, as_array=Fals
             return face_normals.tolist(), normalize_v3(norm).tolist()
     else:
         return face_normals if output_numpy else  face_normals.tolist()
+        
 def calc_centers(triangle_mesh, output_numpy=True):
 
     np_verts = np.asarray(triangle_mesh.vertices)

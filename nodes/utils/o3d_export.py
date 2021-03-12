@@ -153,9 +153,6 @@ else:
         def process(self):
             pass
 
-
-
-
 def register():
     if o3d is not None:
         bpy.utils.register_class(SvO3ExportOperator)

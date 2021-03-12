@@ -8,23 +8,15 @@ from mathutils import Matrix
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList, match_long_repeat
-from sverchok.utils.logging import info, exception
-from sverchok.utils.sv_mesh_utils import polygons_to_edges_np
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
 import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
 
-def clean_doubled_faces(faces):
-    faces_o = np.sort(faces)
-    faces_o, idx = np.unique(faces_o, axis=0, return_index=True)
-    return faces[idx]
-
 if o3d is None:
     add_dummy('SvO3TriangleMeshFromPointCloudNode', 'Triangle Mesh from Point Cloud', 'open3d')
 else:
-    socket_names = ['Vertices', 'Edges', 'Polygons']
     class SvO3TriangleMeshFromPointCloudNode(bpy.types.Node, SverchCustomTreeNode, SvRecursiveNode):
         """
         Triggers: Mesh from Point Cloud
@@ -72,7 +64,7 @@ else:
             update=updateNode)
         density_filter: FloatProperty(
             name="Min Density",
-            default=1.1,
+            default=0,
             update=updateNode)
         clean_faces: BoolProperty(
             name="Clean Doubled Faces",
@@ -148,10 +140,9 @@ else:
                     mesh, vals = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pcd, depth=depth, scale=scale, n_threads=self.n_threads)
                     if density_filter > 0:
                         vals = np.asarray(vals)
-                        mask =  vals< density_filter
+                        mask = vals < density_filter
                         mesh.remove_vertices_by_mask(mask)
                         vals = vals[mask]
-
 
                 omesh.append(mesh)
                 ovals.append(vals)

@@ -1,17 +1,14 @@
 
-import numpy as np
 import copy
 import bpy
-from bpy.props import FloatProperty, EnumProperty, BoolProperty, IntProperty
+from bpy.props import EnumProperty, IntProperty
 from mathutils import Matrix
 
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
-from sverchok.data_structure import updateNode, zip_long_repeat, fullList
-from sverchok.utils.logging import info, exception
+from sverchok.data_structure import updateNode
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
-import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
 
@@ -93,7 +90,7 @@ else:
 
             pcd_out = []
 
-            for mesh, points_num, seed in zip_long_repeat(*params):
+            for mesh, points_num, seed in zip(*params):
 
                 if self.normal_method == 'TRIANGLES':
                     use_triangle_normal = True
@@ -115,7 +112,6 @@ else:
                         use_triangle_normal=use_triangle_normal,
                         seed=seed)
                 pcd_out.append(pcd)
-
 
             return pcd_out
 

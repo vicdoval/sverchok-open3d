@@ -7,13 +7,16 @@ import sverchok_open3d
 from sverchok.dependencies import draw_message
 from sverchok_open3d.dependencies import ex_dependencies, pip, ensurepip
 from sverchok.utils.context_managers import addon_preferences
+
 COMMITS_LINK = 'https://api.github.com/repos/vicdoval/sverchok-open3d/commits'
 ADDON_NAME = sverchok_open3d.__name__
 ADDON_PRETTY_NAME = 'Sverchok Open3d'
 ARCHIVE_LINK = 'https://github.com/vicdoval/sverchok-open3d/archive/'
 MASTER_BRANCH_NAME = 'master'
+
 def draw_in_sv_prefs(layout):
     draw_message(layout, "open3d", dependencies=ex_dependencies)
+    
 def update_addon_ui(layout):
     layout.operator('node.sv_show_latest_commits', text='Show Last Commits').commits_link = COMMITS_LINK
     with addon_preferences(ADDON_NAME) as prefs:

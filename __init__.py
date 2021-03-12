@@ -83,7 +83,7 @@ def unregister_nodes():
     for module in reversed(imported_modules):
         module.unregister()
 
-def make_menu():
+def make_categories():
     menu_cats = []
     index = nodes_index()
     for category, items in index:
@@ -121,28 +121,7 @@ def add_nodes_to_sv():
 
 node_cats = plain_node_list()
 
-class NODEVIEW_MT_Open3Dx(bpy.types.Menu):
-    bl_label = "Open3D"
 
-    def draw(self, context):
-        layout = self.layout
-
-        layout_draw_categories(self.layout, self.bl_label, node_cats['Utils'])
-        layout.menu("NODEVIEW_MT_Open3DPointCloudMenu")
-        layout.menu("NODEVIEW_MT_Open3DTriangleMeshMenu")
-
-
-# does not get registered
-class NodeViewMenuTemplate(bpy.types.Menu):
-    bl_label = ""
-
-    def draw(self, context):
-        layout_draw_categories(self.layout, self.bl_label, node_cats[self.bl_label])
-
-def make_class(name, bl_label):
-    name = 'NODEVIEW_MT_Open3D' + name + 'Menu'
-    clazz = type(name, (NodeViewMenuTemplate,), {'bl_label': bl_label})
-    return clazz
 
 class SvO3CategoryProvider(object):
     def __init__(self, identifier, cats_menu, docs_link, use_custom_menu=False, custom_menu=None):
@@ -163,10 +142,6 @@ def reload_modules():
         debug("Reloading: %s", im)
         importlib.reload(im)
 
-menu_classes = [
-    make_class('PointCloud', 'Point Cloud'),
-    make_class('TriangleMesh', 'Triangle Mesh')
-    ]
 
 def register():
     global our_menu_classes
@@ -184,14 +159,13 @@ def register():
     add_nodes_to_sv()
     menu.register()
 
-    cats_menu = []
-    cats_menu = make_menu() # This would load every sverchok-open3d category straight in the Sv menu
+    cats_menu = make_categories() # This would load every sverchok-open3d category straight in the Sv menu
 
     menu_category_provider = SvO3CategoryProvider("SVERCHOK_OPEN3D", cats_menu, DOCS_LINK, use_custom_menu=True, custom_menu='NODEVIEW_MT_Open3Dx')
     register_extra_category_provider(menu_category_provider) #if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
     examples.register()
 
-    # with make_menu() This would load every sverchok-open3d category straight in the Sv menu
+    # with make_categories() This would load every sverchok-open3d category straight in the Sv menu
     # our_menu_classes = make_extra_category_menus()
 
     show_welcome()
@@ -211,9 +185,7 @@ def unregister():
     #unregister_node_add_operators()
     unregister_nodes()
     menu.unregister()
-    # for class_name in menu_classes:
-    #     bpy.utils.unregister_class(class_name)
-    # bpy.utils.unregister_class(NODEVIEW_MT_Open3Dx)
+
 
     icons.unregister()
     sockets.unregister()
