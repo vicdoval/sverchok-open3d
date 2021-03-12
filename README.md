@@ -1,7 +1,7 @@
 SVERCHOK OPEN3D
 ===============
 
-This is an addon for [Blender][1], was that extends [Sverchok][2]
+This is an addon for [Blender][1], that extends [Sverchok][2]
 addon. Bringing functionalities from the [Open 3d][7] library.
 
 **NOTE**: Sverchok-Open3d contains nodes that may crash Blender so please save frequently.
@@ -19,7 +19,7 @@ At the moment, this addon includes the following nodes for Sverchok:
 
 * *Point Cloud In*: create Point Cloud from Sverchok Data
 * *Point Cloud Out*: Point Cloud to Sverchok Data
-* *Point Cloud Downsample*: Export Point Cloud to file
+* *Point Cloud Downsample*: Reduce density of Point Cloud
 * *Point Cloud Mask*: Filter parts of a point cloud
 * *Point Cloud Calc Normals*: Calculate Point Cloud normals, offers 'Standard' and 'Tangent Plane' methods
 

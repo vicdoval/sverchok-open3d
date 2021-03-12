@@ -131,9 +131,20 @@
       "params": {},
       "width": 140.0
     },
-    "Mesh Join": {
-      "bl_idname": "SvMeshJoinNode",
-      "custom_socket_props": {},
+    "Mesh Join.001": {
+      "bl_idname": "SvMeshJoinNodeMk2",
+      "custom_socket_props": {
+        "0": {
+          "default_mode": "NONE",
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 3
+        },
+        "2": {
+          "nesting_level": 3
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -146,7 +157,19 @@
     },
     "Open3d Transform": {
       "bl_idname": "SvO3Transform",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true,
+          "nesting_level": 1
+        },
+        "1": {
+          "is_mandatory": true
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -154,7 +177,9 @@
         2269.091552734375,
         -51.744842529296875
       ],
-      "params": {},
+      "params": {
+        "method": "NUMBER"
+      },
       "width": 200.0
     },
     "Random Vector": {
@@ -182,7 +207,11 @@
     },
     "Triangle Mesh Clean": {
       "bl_idname": "SvO3TriangleMeshCleanNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -197,7 +226,17 @@
     },
     "Triangle Mesh In": {
       "bl_idname": "SvO3TriangleMeshInNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "3": {
+          "nesting_level": 3
+        },
+        "4": {
+          "nesting_level": 3
+        },
+        "7": {
+          "nesting_level": 3
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -210,7 +249,11 @@
     },
     "Triangle Mesh Out": {
       "bl_idname": "SvO3TriangleMeshOutNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -223,7 +266,19 @@
     },
     "Triangle Mesh Sampling": {
       "bl_idname": "SvO3TriangleMeshSamplingNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "2": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -238,7 +293,11 @@
     },
     "Triangle Mesh Separate Loose": {
       "bl_idname": "SvO3TriangleMeshSeparateNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -251,7 +310,27 @@
     },
     "Triangle Mesh Simplify": {
       "bl_idname": "SvO3TriangleMeshSimplifyNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "2": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "4": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -267,7 +346,23 @@
     },
     "Triangle Mesh Smooth": {
       "bl_idname": "SvO3TriangleMeshSmoothNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "2": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -282,7 +377,31 @@
     },
     "Triangle Mesh from Point Cloud": {
       "bl_idname": "SvO3TriangleMeshFromPointCloudNode",
-      "custom_socket_props": {},
+      "custom_socket_props": {
+        "0": {
+          "is_mandatory": true
+        },
+        "1": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "2": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "3": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "4": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        },
+        "5": {
+          "nesting_level": 1,
+          "pre_processing": "ONE_ITEM"
+        }
+      },
       "height": 100.0,
       "hide": false,
       "label": "",
@@ -367,36 +486,6 @@
   },
   "update_lists": [
     [
-      "Box",
-      0,
-      "Viewer Draw",
-      0
-    ],
-    [
-      "Box",
-      1,
-      "Viewer Draw",
-      1
-    ],
-    [
-      "Box",
-      2,
-      "Viewer Draw",
-      2
-    ],
-    [
-      "Box",
-      0,
-      "Mesh Join",
-      0
-    ],
-    [
-      "Box",
-      2,
-      "Mesh Join",
-      1
-    ],
-    [
       "List Split",
       0,
       "Box",
@@ -409,81 +498,27 @@
       4
     ],
     [
-      "Mesh Join",
+      "Triangle Mesh Out",
       0,
-      "Triangulate mesh",
+      "Dual Mesh",
       0
     ],
     [
-      "Mesh Join",
-      1,
-      "Triangulate mesh",
+      "Triangle Mesh Out",
+      2,
+      "Dual Mesh",
       2
     ],
     [
-      "Triangulate mesh",
-      0,
-      "Triangle Mesh In",
-      1
-    ],
-    [
-      "Triangulate mesh",
-      2,
-      "Triangle Mesh In",
-      4
-    ],
-    [
-      "Triangle Mesh In",
-      0,
-      "Triangle Mesh Sampling",
-      0
-    ],
-    [
-      "Triangle Mesh Sampling",
-      0,
-      "Triangle Mesh from Point Cloud",
-      0
-    ],
-    [
-      "Triangle Mesh from Point Cloud",
-      0,
-      "Triangle Mesh Separate Loose",
-      0
-    ],
-    [
-      "Triangle Mesh Simplify",
-      0,
-      "Triangle Mesh Smooth",
-      0
-    ],
-    [
       "Triangle Mesh Separate Loose",
       0,
       "List Item",
-      0
-    ],
-    [
-      "List Item",
-      0,
-      "Triangle Mesh Simplify",
-      0
-    ],
-    [
-      "Random Vector",
-      0,
-      "Vector Rewire",
       0
     ],
     [
       "List Input",
       0,
       "List Split",
-      0
-    ],
-    [
-      "Triangle Mesh Smooth",
-      0,
-      "Triangle Mesh Clean",
       0
     ],
     [
@@ -499,21 +534,93 @@
       1
     ],
     [
+      "Triangle Mesh Smooth",
+      0,
+      "Triangle Mesh Clean",
+      0
+    ],
+    [
+      "Triangulate mesh",
+      0,
+      "Triangle Mesh In",
+      1
+    ],
+    [
+      "Triangulate mesh",
+      2,
+      "Triangle Mesh In",
+      4
+    ],
+    [
       "Open3d Transform",
       0,
       "Triangle Mesh Out",
       0
     ],
     [
-      "Triangle Mesh Out",
+      "Triangle Mesh In",
       0,
-      "Dual Mesh",
+      "Triangle Mesh Sampling",
       0
     ],
     [
-      "Triangle Mesh Out",
+      "Triangle Mesh from Point Cloud",
+      0,
+      "Triangle Mesh Separate Loose",
+      0
+    ],
+    [
+      "List Item",
+      0,
+      "Triangle Mesh Simplify",
+      0
+    ],
+    [
+      "Triangle Mesh Simplify",
+      0,
+      "Triangle Mesh Smooth",
+      0
+    ],
+    [
+      "Triangle Mesh Sampling",
+      0,
+      "Triangle Mesh from Point Cloud",
+      0
+    ],
+    [
+      "Mesh Join.001",
+      0,
+      "Triangulate mesh",
+      0
+    ],
+    [
+      "Mesh Join.001",
       2,
-      "Dual Mesh",
+      "Triangulate mesh",
+      2
+    ],
+    [
+      "Random Vector",
+      0,
+      "Vector Rewire",
+      0
+    ],
+    [
+      "Box",
+      0,
+      "Viewer Draw",
+      0
+    ],
+    [
+      "Box",
+      1,
+      "Viewer Draw",
+      1
+    ],
+    [
+      "Box",
+      2,
+      "Viewer Draw",
       2
     ],
     [
@@ -526,6 +633,18 @@
       "Dual Mesh",
       1,
       "Viewer Draw.001",
+      2
+    ],
+    [
+      "Box",
+      0,
+      "Mesh Join.001",
+      0
+    ],
+    [
+      "Box",
+      2,
+      "Mesh Join.001",
       2
     ]
   ]
