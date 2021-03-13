@@ -29,10 +29,16 @@ At the moment, this addon includes the following nodes for Sverchok:
 * *Triangle Mesh Sampling*: Creates Point Cloud from mesh, offers Standard and Poisson Distribution
 * *Triangle Mesh Simplify*: Simplifies mesh. Offers: Quadric Decimation, Vertex Clustering and Merge by Distance
 * *Triangle Mesh Clean*: Remove doubled faces and verts, align and normalize normals, delete unused verts, Remove non-manifold edges
-* *Triangle Mesh Smooth*: Offers Simple, Laplacian and  Taubin algorithms
-* *Triangle Mesh Subdivide*: Offers, Loop and Midpoint algorithms
-* *Triangle Mesh Mask*: Filter parts of a Triangle Mesh
-* *Triangle Mesh Deform as Rigid*: Deforms the mesh using the method by Sorkine and Alexa, ‘As-Rigid-As-Possible Surface Modeling’, 2007
+* *Triangle Mesh Smooth*: Offers Simple, Laplacian and  Taubin algorithms.
+* *Triangle Mesh Sharpen*: Sharpen mesh
+* *Triangle Mesh Subdivide*: Offers, Loop and Midpoint algorithms.
+* *Triangle Mesh Mask*: Filter parts of a Triangle Mesh.
+* *Triangle Mesh Separate Loose Parts*: Split separated mesh parts into different meshes.
+* *Triangle Mesh Join*: Join multiple meshes into one mesh.
+* *Triangle Mesh Mask*: Filter parts of a Triangle Mesh.
+* *Triangle Mesh Deform as Rigid*: Deforms the mesh using the method by Sorkine and Alexa, ‘As-Rigid-As-Possible Surface Modeling’, 2007.
+* *Triangle Mesh Intersects*: Determine if two meshes intersect.
+* *Triangle Mesh Self Intersect*: Determine if one mesh intersect with itself and the intersecting face pairs.
 
 
 There will be more.

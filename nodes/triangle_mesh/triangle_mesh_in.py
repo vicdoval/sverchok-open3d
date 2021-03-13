@@ -26,7 +26,7 @@ else:
         bl_icon = 'MESH_DATA'
 
         def sv_init(self, context):
-            self.width = 200
+            self.width = 180
             self.inputs.new('SvO3TriangleMeshSocket', "O3D Triangle Mesh")
             self.inputs.new('SvVerticesSocket', "Vertices")
             self.inputs.new('SvVerticesSocket', "Vertex Normals")

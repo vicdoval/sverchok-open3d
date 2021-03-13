@@ -26,7 +26,8 @@ else:
         bl_idname = 'SvO3TriangleMeshSmoothNode'
         bl_label = 'Triangle Mesh Smooth'
         bl_icon = 'MESH_DATA'
-        sv_icon = 'SV_RANDOM_NUM_GEN'
+
+
         methods = [
             ('simple', "Simple", "Smooth mesh using simple algorithm", 0),
             ('laplacian', "Laplacian", "Smooth mesh using laplacian algorithm", 1),
