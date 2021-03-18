@@ -26,7 +26,7 @@ else:
         bl_idname = 'SvO3TriangleMeshSimplifyNode'
         bl_label = 'Triangle Mesh Simplify'
         bl_icon = 'MESH_DATA'
-        sv_icon = 'SV_RANDOM_NUM_GEN'
+
         methods = [
             ('quadric_decimation', "Quadric Decimation", "Quadric Decimation", 0),
             ('vertex_clustering', "Vertex Clustering", "Vertex Clustering", 1),

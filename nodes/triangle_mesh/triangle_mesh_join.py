@@ -54,7 +54,7 @@ else:
                 np.concatenate([np.asarray(mesh.vertices) for mesh in mesh_in])
                 )
             triangles_len = np.cumsum([0]+[len(mesh.vertices) for mesh in mesh_in])
-    
+
             new_mesh.triangles = o3d.utility.Vector3iVector(
                 np.concatenate([np.asarray(mesh.triangles)+offset for mesh, offset in zip(mesh_in, triangles_len)])
                 )
@@ -67,7 +67,7 @@ else:
             elif self.compute_faces_normals:
                 new_mesh.compute_triangle_normals(normalized=True)
             #
-            has_vertex_normals = [mesh.has_vertex_normals for mesh in mesh_in]
+            has_vertex_normals = [mesh.has_vertex_normals() for mesh in mesh_in]
             if all(has_vertex_normals):
                 new_mesh.triangle_normals = o3d.utility.Vector3dVector(
                     np.concatenate([np.asarray(mesh.vertex_normals)  for mesh in mesh_in])
@@ -75,7 +75,7 @@ else:
             elif self.compute_vertex_normals:
                 new_mesh.compute_vertex_normals(normalized=True)
 
-            has_vertex_colors = [mesh.has_vertex_colors for mesh in mesh_in]
+            has_vertex_colors = [mesh.has_vertex_colors() for mesh in mesh_in]
             if all(has_vertex_colors):
                 new_mesh.vertex_colors = o3d.utility.Vector3dVector(
                     np.concatenate([np.asarray(mesh.vertex_colors)  for mesh in mesh_in])
@@ -85,18 +85,18 @@ else:
                     np.concatenate([np.asarray(mesh.vertex_colors) if mesh.has_vertex_colors else np.zeros((len(mesh.vertices),3), dtype='float')
                                     for mesh in mesh_in])
                     )
-            has_triangle_uvs = [mesh.has_triangle_uvs for mesh in mesh_in]
+            has_triangle_uvs = [mesh.has_triangle_uvs() for mesh in mesh_in]
             if all(has_triangle_uvs):
                 new_mesh.triangle_uvs = o3d.utility.Vector2dVector(
                     np.concatenate([np.asarray(mesh.triangle_uvs)  for mesh in mesh_in])
                     )
             elif any(has_triangle_uvs):
                 new_mesh.triangle_uvs = o3d.utility.Vector2dVector(
-                    np.concatenate([np.asarray(mesh.triangle_uvs) if mesh.has_triangle_uvs else np.zeros((len(mesh.triangles)*2,2), dtype='float')
+                    np.concatenate([np.asarray(mesh.triangle_uvs) if mesh.has_triangle_uvs else np.zeros((len(mesh.triangles)*3, 2), dtype='float')
                     for mesh in mesh_in])
                     )
 
-            has_triangle_material_ids = [mesh.has_triangle_material_ids for mesh in mesh_in]
+            has_triangle_material_ids = [mesh.has_triangle_material_ids() for mesh in mesh_in]
             if all(has_triangle_material_ids):
                 new_mesh.triangle_material_ids = o3d.utility.IntVector(
                     np.concatenate([np.asarray(mesh.triangle_material_ids)  for mesh in mesh_in])
