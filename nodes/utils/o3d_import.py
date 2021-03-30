@@ -32,7 +32,7 @@ else:
             ('point_cloud', "Point Cloud", "Point Cloud", 1),
         ]
         def update_sockets(self, context):
-            self.outputs["Point Cloud"].hide_safe = self.import_type == 'triangle_mesh'
+            self.outputs["O3D Point Cloud"].hide_safe = self.import_type == 'triangle_mesh'
             self.outputs["O3D Triangle Mesh"].hide_safe = self.import_type == 'point_cloud'
         import_type: EnumProperty(
             name="Import",
