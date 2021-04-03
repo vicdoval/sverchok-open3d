@@ -14,7 +14,7 @@ from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
 import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
-from sverchok_open3d.utils.triangle_mesh import calc_normals, calc_centers
+from sverchok_open3d.utils.triangle_mesh import calc_normals, calc_centers, calc_mesh_tris_areas
 from sverchok.utils.dummy_nodes import add_dummy
 
 if o3d is None:
@@ -29,22 +29,23 @@ else:
         bl_label = 'Triangle Mesh Out'
         bl_icon = 'MESH_DATA'
 
-        default_np = (False for i in range(10))
+        default_np = (False for i in range(11))
         out_np: BoolVectorProperty(
             name="Ouput Numpy",
             description="Output NumPy arrays",
             # default=default_np,
-            size=10, update=updateNode)
+            size=11, update=updateNode)
         def sv_init(self, context):
             self.inputs.new('SvO3TriangleMeshSocket', "O3D Triangle Mesh").is_mandatory = True
 
             self.outputs.new('SvVerticesSocket', "Vertices")
             self.outputs.new('SvStringsSocket', "Edges")
             self.outputs.new('SvStringsSocket', "Faces")
-            self.outputs.new('SvVerticesSocket', "Vertex Normals")
-            self.outputs.new('SvColorSocket', "Vertex Colors")
-            self.outputs.new('SvVerticesSocket', "Face Normals")
-            self.outputs.new('SvVerticesSocket', "Face Centers")
+            self.outputs.new('SvVerticesSocket', "Vertex Normal")
+            self.outputs.new('SvColorSocket', "Vertex Color")
+            self.outputs.new('SvVerticesSocket', "Face Normal")
+            self.outputs.new('SvVerticesSocket', "Face Center")
+            self.outputs.new('SvStringsSocket', "Face Area")
             self.outputs.new('SvVerticesSocket', "UV Verts")
             self.outputs.new('SvStringsSocket', "UV Faces")
             self.outputs.new('SvStringsSocket', "Material Id")
@@ -62,7 +63,7 @@ else:
             mesh_s = params[0]
             vertices_out, verts_normals_out, verts_colors_out = [], [], []
             edges_out = []
-            faces_out, f_normals_out, f_centers_out = [], [], []
+            faces_out, f_normals_out, f_centers_out, f_areas_out = [], [], [], []
             uv_verts_out, uv_faces_out, material_id_out = [], [], []
 
             for mesh in mesh_s:
@@ -80,12 +81,21 @@ else:
                     faces_out.append([])
                     edges_out.append([])
 
-                if outputs['Vertex Normals'].is_linked and mesh.has_vertex_normals():
-                    verts_normals_out.append(np.asarray(mesh.vertex_normals) if self.out_np[3] else np.asarray(mesh.vertex_normals).tolist())
-                else:
-                    verts_normals_out.append([])
+                needs_v_normal_calc = outputs['Vertex Normal'].is_linked and not mesh.has_vertex_normals()
+                needs_f_normal_calc = needs_v_normal_calc or (outputs['Face Normal'].is_linked and not mesh.has_triangle_normals())
+                if needs_f_normal_calc:
+                    if needs_v_normal_calc:
+                        face_normals, v_normals = calc_normals(mesh, v_normals=True)
+                    else:
+                        face_normals = calc_normals(mesh, v_normals=False)
 
-                if outputs['Vertex Colors'].is_linked and mesh.has_vertex_colors():
+                if outputs['Vertex Normal'].is_linked:
+                    if mesh.has_vertex_normals():
+                        verts_normals_out.append(np.asarray(mesh.vertex_normals) if self.out_np[3] else np.asarray(mesh.vertex_normals).tolist())
+                    else:
+                        verts_normals_out.append(v_normals if self.out_np[3] else v_normals.tolist())
+
+                if outputs['Vertex Color'].is_linked and mesh.has_vertex_colors():
                     colors = np.asarray(mesh.vertex_colors)
                     colors_a = np.ones((colors.shape[0], 4))
                     colors_a[:,:3] = colors
@@ -94,34 +104,40 @@ else:
                     verts_colors_out.append([])
 
 
-                if outputs['Face Normals'].is_linked:
+                if outputs['Face Normal'].is_linked:
                     if mesh.has_triangle_normals():
                         f_normals_out.append(np.asarray(mesh.triangle_normals) if self.out_np[5] else np.asarray(mesh.triangle_normals).tolist())
                     else:
-                        f_normals_out.append(calc_normals(mesh, v_normals=False, output_numpy=self.out_np[5]))
+                        f_normals_out.append(face_normals if self.out_np[5] else face_normals.tolist())
 
 
-                if outputs['Face Centers'].is_linked:
+                if outputs['Face Center'].is_linked:
                     f_centers_out.append(calc_centers(mesh, output_numpy=self.out_np[6]))
+                if outputs['Face Area'].is_linked:
+                    f_areas_out.append(calc_mesh_tris_areas(mesh, output_numpy=self.out_np[7]))
 
                 if mesh.has_triangle_uvs() and (outputs['UV Verts'].is_linked or outputs['UV Faces'].is_linked):
                     uvs = np.asarray(mesh.triangle_uvs)
-                    new_uvs = np.zeros((uvs.shape[0],3), dtype='float')
+                    new_uvs = np.zeros((uvs.shape[0], 3), dtype='float')
                     new_uvs[:, :2] = uvs
-                    uv_verts_out.append(new_uvs if self.out_np[7] else new_uvs.tolist())
+                    uv_verts_out.append(new_uvs if self.out_np[8] else new_uvs.tolist())
                     uv_faces = np.arange(new_uvs.shape[0], dtype='int').reshape(-1,3)
-                    uv_faces_out.append(uv_faces if self.out_np[8] else uv_faces.tolist())
+                    uv_faces_out.append(uv_faces if self.out_np[9] else uv_faces.tolist())
                 else:
                     uv_verts_out.append([])
                     uv_faces_out.append([])
 
                 if mesh.has_triangle_material_ids() and self.outputs['Material Id'].is_linked:
-                    material_id_out.append(np.asarray(mesh.triangle_material_ids) if self.out_np[9] else np.asarray(mesh.triangle_material_ids).tolist())
+                    material_id_out.append(np.asarray(mesh.triangle_material_ids) if self.out_np[10] else np.asarray(mesh.triangle_material_ids).tolist())
                 else:
                     material_id_out.append([])
 
 
-            return vertices_out, edges_out, faces_out, verts_normals_out, verts_colors_out, f_normals_out, f_centers_out, uv_verts_out, uv_faces_out, material_id_out
+            return (vertices_out, edges_out, faces_out,
+                    verts_normals_out, verts_colors_out,
+                    f_normals_out, f_centers_out, f_areas_out,
+                    uv_verts_out, uv_faces_out,
+                    material_id_out)
 
 
 

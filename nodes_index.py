@@ -21,6 +21,7 @@ def nodes_index():
                 ("", "separator"),
                 ("triangle_mesh.triangle_mesh_simplify", "SvO3TriangleMeshSimplifyNode"),
                 ("triangle_mesh.triangle_mesh_subdivide", "SvO3TriangleMeshSubdivideNode"),
+                ("triangle_mesh.triangle_mesh_poke", "SvO3TriangleMeshPokeNode"),
                 ("triangle_mesh.triangle_mesh_smooth", "SvO3TriangleMeshSmoothNode"),
                 ("triangle_mesh.triangle_mesh_sharpen", "SvO3TriangleMeshSharpenNode"),
                 ("triangle_mesh.triangle_mesh_deform_as_rigid", "SvO3TriangleMeshDeformAsRigidNode"),

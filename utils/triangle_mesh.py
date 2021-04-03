@@ -42,7 +42,7 @@ def calc_normals(triangle_mesh, v_normals=True, output_numpy=True, as_array=Fals
             return face_normals.tolist(), normalize_v3(norm).tolist()
     else:
         return face_normals if output_numpy else  face_normals.tolist()
-        
+
 def calc_centers(triangle_mesh, output_numpy=True):
 
     np_verts = np.asarray(triangle_mesh.vertices)
@@ -51,3 +51,13 @@ def calc_centers(triangle_mesh, output_numpy=True):
     center = np.sum(v_pols,axis=1)/3
 
     return center if output_numpy else  center.tolist()
+
+def calc_mesh_tris_areas(mesh, output_numpy=True):
+    if output_numpy:
+        return calc_tris_areas(np.asarray(mesh.vertices)[np.asarray(mesh.triangles)])
+    return calc_tris_areas(np.asarray(mesh.vertices)[np.asarray(mesh.triangles)]).tolist()
+    
+
+def calc_tris_areas(v_pols):
+    perp = np.cross(v_pols[:, 1]- v_pols[:, 0], v_pols[:, 2]- v_pols[:,0])/2
+    return np.linalg.norm(perp, axis=1)/2

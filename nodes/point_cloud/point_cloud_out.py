@@ -41,17 +41,19 @@ else:
             update=updateNode)
 
         def sv_init(self, context):
+            self.width = 180
             self.inputs.new('SvO3PointCloudSocket', 'O3D Point Cloud').is_mandatory = True
 
             self.outputs.new('SvVerticesSocket', "Vertices")
             self.outputs.new('SvVerticesSocket', "Normals")
             self.outputs.new('SvColorSocket', "Colors")
+            self.outputs.new('SvStringsSocket', "Nearest Neighbor Distance")
         def draw_buttons_ext(self, context, layout):
             layout.prop(self, 'output_numpy')
 
         def process_data(self, params):
 
-            verts_out, normals_out, color_out = [], [], []
+            verts_out, normals_out, color_out, near_distance = [], [], [], []
             for pcd in params[0]:
                 if self.outputs['Vertices'].is_linked:
                     verts_out.append(np.asarray(pcd.points) if self.output_numpy else np.asarray(pcd.points).tolist())
@@ -62,14 +64,19 @@ else:
                 if pcd.has_colors and self.outputs['Colors'].is_linked:
                     colors = np.asarray(pcd.colors)
                     colors_a = np.ones((colors.shape[0],4))
-                    colors_a[:,:3]=colors
+                    colors_a[:,:3] = colors
                     color_out.append(colors_a if self.output_numpy else colors_a.tolist())
                 else:
                     color_out.append([])
+                if self.outputs['Nearest Neighbor Distance'].is_linked:
+                    near_distance.append(
+                        np.asarray(pcd.compute_nearest_neighbor_distance())
+                        if self.output_numpy else
+                        np.asarray(pcd.compute_nearest_neighbor_distance()).tolist())
 
 
 
-            return verts_out, normals_out, color_out
+            return verts_out, normals_out, color_out, near_distance
 
 
 

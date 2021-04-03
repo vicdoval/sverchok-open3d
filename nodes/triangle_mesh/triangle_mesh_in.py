@@ -26,7 +26,7 @@ else:
         bl_icon = 'MESH_DATA'
 
         def sv_init(self, context):
-            self.width = 180
+
             self.inputs.new('SvO3TriangleMeshSocket', "O3D Triangle Mesh")
             self.inputs.new('SvVerticesSocket', "Vertices")
             self.inputs.new('SvVerticesSocket', "Vertex Normals")
@@ -93,8 +93,9 @@ else:
                     np_uv_faces = np.array(uv_faces)
                     np_uv_verts = np.array(uv_verts)
                     uvs_0 = np_uv_verts[np_uv_faces][:, :, :2]
-                    uvs = o3d.utility.Vector2dVector(matched(uvs_0.reshape(-1, 2), tri_len))
+                    uvs = o3d.utility.Vector2dVector(matched(uvs_0, tri_len).reshape(-1, 2))
                     mesh.triangle_uvs = uvs
+
                 if len(material_id) > 0:
                     mesh.triangle_material_ids = o3d.utility.IntVector(matched(np.array(material_id), tri_len))
                 mesh_out.append(mesh)
