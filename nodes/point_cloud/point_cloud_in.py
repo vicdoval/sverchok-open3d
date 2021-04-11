@@ -7,7 +7,7 @@ from mathutils import Matrix
 
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
-from sverchok.data_structure import updateNode, zip_long_repeat, fullList
+from sverchok.data_structure import updateNode, has_element
 from sverchok.utils.logging import info, exception
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
@@ -63,14 +63,12 @@ else:
             for vertices, normals, colors in zip(*params):
                 pcd = o3d.geometry.PointCloud()
                 pcd.points = o3d.utility.Vector3dVector(np.array(vertices))
-                if len(normals)>0:
+                if has_element(normals):
                     pcd.normals = o3d.utility.Vector3dVector(np.array(normals))
                 elif self.normal_method != 'NONE':
                     calc_point_cloud_normals(pcd, self.normal_quality, self.normal_method)
 
-
-
-                if len(colors) > 0:
+                if has_element(colors):
                     pcd.colors = o3d.utility.Vector3dVector(np.array(colors)[:,:3])
                 point_clouds_out.append(pcd)
 

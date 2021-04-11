@@ -6,7 +6,7 @@ import bpy
 from bpy.props import FloatProperty, BoolVectorProperty, BoolProperty, IntProperty
 from mathutils import Matrix
 from sverchok.node_tree import SverchCustomTreeNode
-from sverchok.data_structure import updateNode, numpy_full_list
+from sverchok.data_structure import updateNode, numpy_full_list, has_element
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 from sverchok.utils.dummy_nodes import add_dummy
 
@@ -99,7 +99,7 @@ else:
             new_faces[:, i, 1] = np_faces[mask, (i + 1) % 3]
         new_faces_shaped = new_faces.reshape(-1, 3)
         all_faces = np.concatenate([np_faces[np.invert(mask)], new_faces_shaped])
-        if len(v_color) > 0:
+        if has_element(v_color):
             if triangle_mesh.has_vertex_colors():
                 v_col = numpy_full_list(v_color, len(new_vecs))[:,:3]
                 triangle_mesh.vertex_colors = vec_3f(np.concatenate([np.asarray(triangle_mesh.vertex_colors), v_col]))

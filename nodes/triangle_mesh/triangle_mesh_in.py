@@ -7,7 +7,7 @@ from mathutils import Matrix
 
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
-from sverchok.data_structure import updateNode, zip_long_repeat, numpy_full_list_cycle
+from sverchok.data_structure import updateNode, zip_long_repeat, numpy_full_list_cycle, has_element
 from sverchok.utils.logging import info, exception
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 from sverchok_open3d.dependencies import open3d as o3d
@@ -65,11 +65,11 @@ else:
                 else:
                     mesh = o3d.geometry.TriangleMesh()
 
-                if len(vertices) > 0:
+                if has_element(vertices):
                     np_vertices = np.array(vertices)
                     mesh.vertices = vec_3f(np_vertices)
 
-                if len(faces) > 0:
+                if has_element(faces):
                     try:
                         np_triangles = np.array(faces).astype(np.int32)
                     except ValueError:
@@ -80,16 +80,17 @@ else:
 
                 vert_len = len(mesh.vertices)
                 tri_len = len(mesh.triangles)
-                if len(verts_normals) > 0:
+                if has_element(verts_normals):
                     mesh.vertex_normals = vec_3f(matched(np.array(verts_normals), vert_len))
 
-                if len(verts_colors) > 0:
+                if has_element(verts_colors):
                     mesh.vertex_colors = vec_3f(matched(np.array(verts_colors)[:, :3], vert_len))
 
-                if len(f_normals) > 0:
+                if has_element(f_normals):
+                    print(len(f_normals))
                     mesh.triangle_normals = vec_3f(matched(np.array(f_normals), tri_len))
 
-                if len(uv_verts) > 0 and len(uv_faces) > 0:
+                if has_element(uv_verts) and has_element(uv_faces):
                     np_uv_faces = np.array(uv_faces)
                     np_uv_verts = np.array(uv_verts)
                     uvs_0 = np_uv_verts[np_uv_faces][:, :, :2]
