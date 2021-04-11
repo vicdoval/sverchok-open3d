@@ -8,9 +8,10 @@ import copy
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
-import numpy as np
-from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
+
+from sverchok_open3d.dependencies import open3d as o3d
+from sverchok_open3d.utils.triangle_mesh import triangle_mesh_viewer_map
 
 if o3d is None:
     add_dummy('SvO3TriangleMeshSubdivideNode', 'O3D Triangle Mesh Subdivide', 'open3d')
@@ -23,12 +24,12 @@ else:
         bl_idname = 'SvO3TriangleMeshSubdivideNode'
         bl_label = 'Triangle Mesh Subdivide'
         bl_icon = 'MESH_DATA'
+        viewer_map = triangle_mesh_viewer_map
 
         methods = [
             ('loop', "Loop", "Subdivide mesh using Loop’s algorithm", 0),
             ('midpoint', "Midpoint", "Subdivide mesh using midpoint algorithm", 1),
         ]
-
         method: EnumProperty(
             name="Method",
             items=methods,

@@ -9,10 +9,10 @@ import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList, match_long_repeat
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
-
-import numpy as np
-from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
+
+from sverchok_open3d.dependencies import open3d as o3d
+from sverchok_open3d.utils.triangle_mesh import triangle_mesh_viewer_map
 
 if o3d is None:
     add_dummy('SvO3TriangleMeshFromPointCloudNode', 'Triangle Mesh from Point Cloud', 'open3d')
@@ -26,7 +26,7 @@ else:
         bl_label = 'Triangle Mesh from Point Cloud'
         bl_icon = 'MESH_DATA'
         sv_icon = 'SV_RANDOM_NUM_GEN'
-
+        viewer_map = triangle_mesh_viewer_map
         methods = [
             ('ALPHA', "Alpha Shape", "Alpha Shape", 0),
             ('BALL_PIVOTING', "Ball Pivoting", "Ball Pivoting algorithm (Slow)", 1),

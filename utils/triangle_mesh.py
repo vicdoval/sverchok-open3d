@@ -1,5 +1,14 @@
 import numpy as np
 
+triangle_mesh_viewer_map = [
+    ("SvO3TriangleMeshOutNode", [60, 0]),
+    ("SvViewerDrawMk4", [60, 0]),
+    ], [
+    ([0, 0], [1, 0]),
+    ([1, 0], [2, 0]),
+    ([1, 1], [2, 1]),
+    ([1, 2], [2, 2]),
+    ]
 def clean_doubled_faces(trimesh):
     faces_o = np.sort(trimesh.triangles)
     _, idx = np.unique(faces_o, axis=0, return_index=True)
@@ -34,14 +43,14 @@ def calc_normals(triangle_mesh, v_normals=True, output_numpy=True, as_array=Fals
     normalize_v3(face_normals)
     if v_normals:
         for i in range(np_faces.shape[1]):
-            norm[ np_faces[:,i] ] += face_normals
+            np.add.at(norm, np_faces[:, i], face_normals)
     if v_normals:
         if output_numpy:
             return face_normals, normalize_v3(norm)
-        else:
-            return face_normals.tolist(), normalize_v3(norm).tolist()
-    else:
-        return face_normals if output_numpy else  face_normals.tolist()
+
+        return face_normals.tolist(), normalize_v3(norm).tolist()
+
+    return face_normals if output_numpy else  face_normals.tolist()
 
 def calc_centers(triangle_mesh, output_numpy=True):
 
@@ -56,7 +65,7 @@ def calc_mesh_tris_areas(mesh, output_numpy=True):
     if output_numpy:
         return calc_tris_areas(np.asarray(mesh.vertices)[np.asarray(mesh.triangles)])
     return calc_tris_areas(np.asarray(mesh.vertices)[np.asarray(mesh.triangles)]).tolist()
-    
+
 
 def calc_tris_areas(v_pols):
     perp = np.cross(v_pols[:, 1]- v_pols[:, 0], v_pols[:, 2]- v_pols[:,0])/2

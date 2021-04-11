@@ -5,15 +5,15 @@ import bpy
 from bpy.props import FloatProperty, EnumProperty, BoolProperty, IntProperty
 from mathutils import Matrix
 import copy
-import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList
 from sverchok.utils.logging import info, exception
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
-
-import numpy as np
-from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
+
+from sverchok_open3d.dependencies import open3d as o3d
+from sverchok_open3d.utils.triangle_mesh import triangle_mesh_viewer_map
+
 
 if o3d is None:
     add_dummy('SvO3TriangleMeshSharpenNode', 'O3D Triangle Mesh Sharpen', 'open3d')
@@ -26,7 +26,7 @@ else:
         bl_idname = 'SvO3TriangleMeshSharpenNode'
         bl_label = 'Triangle Mesh Sharpen'
         bl_icon = 'MESH_DATA'
-
+        viewer_map = triangle_mesh_viewer_map
 
         iterations: IntProperty(
             name="Iterations",

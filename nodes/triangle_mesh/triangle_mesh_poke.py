@@ -11,7 +11,7 @@ from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 from sverchok.utils.dummy_nodes import add_dummy
 
 from sverchok_open3d.dependencies import open3d as o3d
-from sverchok_open3d.utils.triangle_mesh import calc_normals, calc_tris_areas
+from sverchok_open3d.utils.triangle_mesh import triangle_mesh_viewer_map, calc_normals, calc_tris_areas
 
 if o3d is None:
     add_dummy('SvO3TriangleMeshPokeNode', 'O3D Triangle Mesh Poke', 'open3d')
@@ -140,15 +140,8 @@ else:
         bl_icon = 'MESH_DATA'
 
 
-        viewer_map = [
-            ("SvO3TriangleMeshOutNode", [60, 0]),
-            ("SvViewerDrawMk4", [60, 0]),
-            ], [
-            ([0, 0], [1, 0]),
-            ([1, 0], [2, 0]),
-            ([1, 1], [2, 1]),
-            ([1, 2], [2, 2]),
-            ]
+        viewer_map = triangle_mesh_viewer_map
+
         offset: FloatProperty(
             name="Offset",
             default=1,

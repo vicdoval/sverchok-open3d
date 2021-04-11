@@ -10,10 +10,10 @@ from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList
 from sverchok.utils.logging import info, exception
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
-
-import numpy as np
-from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
+
+from sverchok_open3d.dependencies import open3d as o3d
+from sverchok_open3d.utils.triangle_mesh import triangle_mesh_viewer_map
 
 if o3d is None:
     add_dummy('SvO3TriangleMeshSmoothNode', 'O3D Triangle Mesh Smooth', 'open3d')
@@ -26,7 +26,7 @@ else:
         bl_idname = 'SvO3TriangleMeshSmoothNode'
         bl_label = 'Triangle Mesh Smooth'
         bl_icon = 'MESH_DATA'
-
+        viewer_map = triangle_mesh_viewer_map
 
         methods = [
             ('simple', "Simple", "Smooth mesh using simple algorithm", 0),
