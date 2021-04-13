@@ -6,7 +6,7 @@ addon. Bringing functionalities from the [Open 3d][7] library.
 
 **NOTE**: Sverchok-Open3d contains nodes that may crash Blender so please save frequently.
 
-The documentation is absent, but you can check the open3d documentation.
+The documentation is almost absent, but you can check the open3d documentation.
 
 Features
 --------
@@ -53,13 +53,18 @@ Installation
 * In the addon options you will see if you have already installed Open3d library otherwise click on "Install with Pip"
 * Save preferences, if you want to enable the addon permanently.
 
+Sverchok Addon Template
+-----------------------
 The other purpose of this add-on is to serve as template to create external Sverchok Add-ons.
 Using this repository as template you will have:
-Your own sockets
-Separators in the Add menu
-Sub menus in the added menus (not implemented yet)
-Link to your own node documentation from Blender UI
+* Your own sockets
+* Separators in the Add menu
+* Sub menus in the added menus
+* Link to your own node documentation from Blender UI
+* Examples added to the Sverchok Examples menu
+* Update your addon from Blender UI
 
+If there is something you don0nt understand in the code please open a issue so I can add more documentation to the code
 
 LICENSE: GPL-3.
 
