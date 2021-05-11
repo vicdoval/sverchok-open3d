@@ -23,7 +23,7 @@ except ImportError:
     print(message)
     sverchok = None
 
-opend3D_d = ex_dependencies["open3d"] = SvDependency("open3d", "https://www.freecadweb.org/")
+opend3D_d = ex_dependencies["open3d"] = SvDependency("open3d", "http://www.open3d.org/")
 opend3D_d.pip_installable = True
 try:
     import open3d
