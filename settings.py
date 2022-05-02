@@ -2,7 +2,11 @@
 import bpy
 from bpy.types import AddonPreferences
 
-PYPATH = bpy.app.binary_path_python
+if bpy.app.version >= (2, 91, 0):
+    PYPATH = sys.executable
+else:
+    PYPATH = bpy.app.binary_path_python
+
 import sverchok_open3d
 from sverchok.dependencies import draw_message
 from sverchok_open3d.dependencies import ex_dependencies, pip, ensurepip
