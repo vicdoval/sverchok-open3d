@@ -1,5 +1,6 @@
 
 import bpy
+import sys
 from bpy.types import AddonPreferences
 
 if bpy.app.version >= (2, 91, 0):
