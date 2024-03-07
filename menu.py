@@ -1,5 +1,5 @@
 import bpy
-from sverchok.ui.nodeview_space_menu import make_extra_category_menus, layout_draw_categories
+from sverchok.ui.nodeview_space_menu import layout_draw_categories
 from sverchok_open3d.nodes_index import nodes_index
 from sverchok_open3d.dependencies import open3d as o3d
 

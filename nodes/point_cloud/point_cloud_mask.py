@@ -8,14 +8,14 @@ from mathutils import Matrix
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList
-from sverchok.utils.logging import info, exception
+from sverchok.utils.sv_logging import sv_logger
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
 import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
-from sverchok.utils.dummy_nodes import add_dummy
 
 if o3d is None:
+    from sverchok.utils.dummy_nodes import add_dummy
     add_dummy('SvO3PointCloudMaskNode', 'Point Cloud Mask', 'open3d')
 else:
     class SvO3PointCloudMaskNode(bpy.types.Node, SverchCustomTreeNode, SvRecursiveNode):
