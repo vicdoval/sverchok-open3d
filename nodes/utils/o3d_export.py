@@ -4,6 +4,7 @@ import numpy as np
 import bpy
 from bpy.props import FloatProperty, EnumProperty, BoolProperty, IntProperty, StringProperty
 from mathutils import Matrix
+from bpy.props import StringProperty
 
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
@@ -22,6 +23,8 @@ else:
         bl_idname = "node.sv_export_open3d"
         bl_label = "Open3d Export"
         bl_options = {'INTERNAL', 'REGISTER'}
+        node_name : StringProperty()
+        tree_name: StringProperty()
 
         idtree: StringProperty(default='')
         idname: StringProperty(default='')
