@@ -10,9 +10,9 @@ from sverchok.data_structure import updateNode
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
 from sverchok_open3d.dependencies import open3d as o3d
-from sverchok.utils.dummy_nodes import add_dummy
 
 if o3d is None:
+    from sverchok.utils.dummy_nodes import add_dummy
     add_dummy('SvO3TriangleMeshSamplingNode', 'Triangle Mesh Sampling', 'open3d')
 else:
     class SvO3TriangleMeshSamplingNode(bpy.types.Node, SverchCustomTreeNode, SvRecursiveNode):

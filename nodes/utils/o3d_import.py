@@ -8,13 +8,13 @@ from mathutils import Matrix
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList
-from sverchok.utils.logging import info, exception
+from sverchok.utils.sv_logging import sv_logger
 
 import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
-from sverchok.utils.dummy_nodes import add_dummy
 
 if o3d is None:
+    from sverchok.utils.dummy_nodes import add_dummy
     add_dummy('SvO3ImportNode', 'Open3D Import', 'open3d')
 else:
 

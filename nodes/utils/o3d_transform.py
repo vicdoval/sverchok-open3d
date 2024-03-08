@@ -10,16 +10,16 @@ from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, numpy_full_list_cycle, changable_sockets, get_other_socket
 from sverchok.utils.field.scalar import SvScalarField
 from sverchok.utils.field.vector import SvVectorField
-from sverchok.utils.logging import info, exception
+from sverchok.utils.sv_logging import sv_logger
 from sverchok.utils.modules.matrix_utils import matrix_apply_np
 from sverchok.utils.nodes_mixins.recursive_nodes import SvRecursiveNode
 
-from sverchok.utils.dummy_nodes import add_dummy
 import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
 from sverchok_open3d.utils.triangle_mesh import calc_normals
 
 if o3d is None:
+    from sverchok.utils.dummy_nodes import add_dummy
     add_dummy('SvO3Transform', 'Open3d Transform', 'open3d')
 else:
     transformation_dict = {

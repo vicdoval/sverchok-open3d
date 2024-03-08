@@ -4,17 +4,18 @@ import numpy as np
 import bpy
 from bpy.props import FloatProperty, EnumProperty, BoolProperty, IntProperty, StringProperty
 from mathutils import Matrix
+from bpy.props import StringProperty
 
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat, fullList
-from sverchok.utils.logging import info, exception
+from sverchok.utils.sv_logging import sv_logger
 
 import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
-from sverchok.utils.dummy_nodes import add_dummy
 
 if o3d is None:
+    from sverchok.utils.dummy_nodes import add_dummy
     add_dummy('SvO3ExportNode', 'Open3d Export', 'open3d')
 else:
     class SvO3ExportOperator(bpy.types.Operator):
@@ -22,6 +23,8 @@ else:
         bl_idname = "node.sv_export_open3d"
         bl_label = "Open3d Export"
         bl_options = {'INTERNAL', 'REGISTER'}
+        node_name : StringProperty()
+        tree_name: StringProperty()
 
         idtree: StringProperty(default='')
         idname: StringProperty(default='')

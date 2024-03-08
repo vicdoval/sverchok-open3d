@@ -10,7 +10,7 @@ else:
 
 import sverchok_open3d
 from sverchok.dependencies import draw_message
-from sverchok_open3d.dependencies import ex_dependencies, pip, ensurepip
+from sverchok_open3d.dependencies import ex_dependencies
 from sverchok.utils.context_managers import addon_preferences
 
 COMMITS_LINK = 'https://api.github.com/repos/vicdoval/sverchok-open3d/commits'
@@ -77,11 +77,11 @@ class SvO3Preferences(AddonPreferences):
 
 def register():
     bpy.utils.register_class(SvO3Preferences)
-    bpy.types.SV_PT_SverchokUtilsPanel.append(sv_draw_update_menu_in_panel)
+    #bpy.types.SV_PT_SverchokUtilsPanel.append(sv_draw_update_menu_in_panel)
 
 def unregister():
     bpy.utils.unregister_class(SvO3Preferences)
-    bpy.types.SV_PT_SverchokUtilsPanel.remove(sv_draw_update_menu_in_panel)
+    #bpy.types.SV_PT_SverchokUtilsPanel.remove(sv_draw_update_menu_in_panel)
 
 if __name__ == '__main__':
     register()
