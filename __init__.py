@@ -20,8 +20,9 @@ import nodeitems_utils
 import sverchok
 from sverchok.node_tree import SverchCustomTreeNode
 from sverchok.data_structure import updateNode, zip_long_repeat
+from sverchok.utils.context_managers import sv_preferences
 from sverchok.utils.sv_logging import sv_logger
-from sverchok.ui.nodeview_space_menu import add_node_menu
+from sverchok.ui.nodeview_space_menu import add_node_menu, Category
 
 # make sverchok the root module name, (if sverchok dir not named exactly "sverchok")
 if __name__ != "sverchok_open3d":
@@ -37,44 +38,61 @@ from sverchok_open3d.utils import show_welcome
 DOCS_LINK = 'https://github.com/vicdoval/sverchok-open3d/tree/master/utils'
 MODULE_NAME = 'open3d'
 
-def convert_config(config):
-    new_form = []
-    for cat_name, items in config:
-        new_items = []
-        for item in items:
-            if item is None:
-                new_items.append('---')
-                continue
-            path, bl_idname = item
-            new_items.append(bl_idname)
-        cat = {cat_name: new_items}
-        new_form.append(cat)
-    return new_form
+# Convert struct to menu.
+# In:
+#   - source struct
+#   - lambda to convert tuples (final items are tuples in format ("{path}utils.o3d_import", "{class_name}SvO3ImportNode"))
+def convert_config(obj, func=None):
+    if not func:
+        func = lambda elem: elem # call only on tuples
+    cls_names = []
+    if type(obj)==dict:
+        cls_names = dict()
 
-add_node_menu.append_from_config(convert_config(nodes_index()))
+    for elem in obj:
+        if elem==None: # this is menu items break
+            cls_names.append( func(elem) )
+        elif type(elem)==tuple:
+            cls_names.append( func(elem) ) # this is menu item - tuple of two params
+        elif type(obj)==dict:
+            res = convert_config(obj[elem], func) # this is submenu
+            if res:
+                cls_names[elem]=res
+        elif type(obj)==list:
+            res = convert_config(elem, func)
+            if res:
+                cls_names.append(res)
+        else:
+            raise Exception("Menu struct error")
+    return cls_names
+
+# function as argument for convert_config. call only on tuples
+def collect_classes_names(elem):
+    if elem is None:
+        res = '---'  # menu splitter. Used by Sverchok.
+    elif isinstance(elem[0], dict): # property of menugroup, ex: ({'icon_name': 'MESH_BOX'}) for icon.
+        res = elem[0]
+    else:
+        res = elem[1]  # class name to bind to menu Shift-A
+    return res
+nodes_items = convert_config(nodes_index(), collect_classes_names)
+add_node_menu.append_from_config( nodes_items )
 
 def make_node_list():
     modules = []
     base_name = "sverchok_open3d.nodes"
-    index = nodes_index()
-    for category, items in index:
-        for item in items:
-            if not item:
-                continue
-            module_name, node_name = item
-            module = importlib.import_module(f".{module_name}", base_name)
-            modules.append(module)
+    arr_items = []
+    def collect_module_names(elem):
+        if elem is not None:
+            if isinstance(elem[0], str):
+                arr_items.append(elem[0])
+        return elem
+    convert_config(nodes_index(), collect_module_names)
+    for module_name in arr_items:
+        module = importlib.import_module(f".{module_name}", base_name)
+        modules.append(module)
     return modules
 
-def plain_node_list():
-    node_cats = {}
-    index = nodes_index()
-    for category, items in index:
-        nodes = []
-        for _, node_name in items:
-            nodes.append([node_name])
-        node_cats[category] = nodes
-    return node_cats
 imported_modules = [icons] + make_node_list()
 
 reload_event = False
@@ -96,51 +114,6 @@ def unregister_nodes():
     for module in reversed(imported_modules):
         module.unregister()
 
-def make_categories():
-    menu_cats = []
-    index = nodes_index()
-    for category, items in index:
-        identifier = "SVERCHOK_OPEN3D_" + category.replace(' ', '_')
-        node_items = []
-        for item in items:
-            nodetype = item[1]
-            rna = get_node_class_reference(nodetype)
-            if not rna and nodetype != 'separator':
-                sv_logger.info("Node `%s' is not available (probably due to missing dependencies).", nodetype)
-            else:
-                node_item = SverchNodeItem.new(nodetype)
-                node_items.append(node_item)
-        if node_items:
-            cat = SverchNodeCategory(
-                        identifier,
-                        category,
-                        items=node_items
-                    )
-            menu_cats.append(cat)
-    return menu_cats
-
-def add_nodes_to_sv():
-    index = nodes_index()
-    for _, items in index:
-        for item in items:
-            nodetype = item[1]
-            rna = get_node_class_reference(nodetype)
-            if not rna and nodetype != 'separator':
-                sv_logger.info("Node `%s' is not available (probably due to missing dependencies).", nodetype)
-            else:
-                SverchNodeItem.new(nodetype)
-
-class SvO3CategoryProvider(object):
-    def __init__(self, identifier, cats_menu, docs_link, use_custom_menu=False, custom_menu=None):
-        self.identifier = identifier
-        self.menu = cats_menu
-        self.docs = docs_link
-        self.use_custom_menu = use_custom_menu
-        self.custom_menu = custom_menu
-
-    def get_categories(self):
-        return self.menu
-
 our_menu_classes = []
 
 def reload_modules():
@@ -161,13 +134,12 @@ def register():
     sockets.register()
 
     register_nodes()
-    extra_nodes = importlib.import_module(".nodes", "sverchok_open3d")
+    #extra_nodes = importlib.import_module(".nodes", "sverchok_open3d")
     show_welcome()
 
 def unregister():
     global our_menu_classes
     if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
-        #unregister_node_panels()
         nodeitems_utils.unregister_node_categories("SVERCHOK_OPEN3D")
     for clazz in our_menu_classes:
         try:
