@@ -14,70 +14,65 @@ import numpy as np
 from sverchok_open3d.dependencies import open3d as o3d
 from sverchok.utils.dummy_nodes import add_dummy
 
-if o3d is None:
-    add_dummy('SvO3PointCloudImportNode', 'Point Cloud Import', 'open3d')
-else:
+class SvO3PointCloudImportNode(bpy.types.Node, SverchCustomTreeNode):
+    """
+    Triggers: Point Cloud Import
+    Tooltip: Point Cloud Import
+    """
+    bl_idname = 'SvO3PointCloudImportNode'
+    bl_label = 'Point Cloud Import'
+    bl_icon = 'OUTLINER_OB_EMPTY'
+    sv_icon = 'SV_RANDOM_NUM_GEN'
+    sv_dependencies = ['open3d']
 
-    class SvO3PointCloudImportNode(bpy.types.Node, SverchCustomTreeNode):
-        """
-        Triggers: Point Cloud Import
-        Tooltip: Point Cloud Import
-        """
-        bl_idname = 'SvO3PointCloudImportNode'
-        bl_label = 'Point Cloud Import'
-        bl_icon = 'OUTLINER_OB_EMPTY'
-        sv_icon = 'SV_RANDOM_NUM_GEN'
+    remove_nan_points: BoolProperty(
+        name="Remove NaN points",
+        default=True,
+        update=updateNode)
+    remove_infinite_points: BoolProperty(
+        name="Remove Infinite points",
+        default=True,
+        update=updateNode)
+    print_progress: BoolProperty(
+        name="Print Progress in console",
+        default=False,
+        update=updateNode)
+    def sv_init(self, context):
+        self.inputs.new('SvFilePathSocket', "File Path")
+        self.outputs.new('SvStringsSocket', "Point Cloud")
 
-        remove_nan_points: BoolProperty(
-            name="Remove NaN points",
-            default=True,
-            update=updateNode)
-        remove_infinite_points: BoolProperty(
-            name="Remove Infinite points",
-            default=True,
-            update=updateNode)
-        print_progress: BoolProperty(
-            name="Print Progress in console",
-            default=False,
-            update=updateNode)
-        def sv_init(self, context):
-            self.inputs.new('SvFilePathSocket', "File Path")
-            self.outputs.new('SvStringsSocket', "Point Cloud")
+    def draw_buttons(self, context, layout):
+        layout.prop(self, 'remove_nan_points')
+        layout.prop(self, 'remove_infinite_points')
+        layout.prop(self, 'print_progress')
 
-        def draw_buttons(self, context, layout):
-            layout.prop(self, 'remove_nan_points')
-            layout.prop(self, 'remove_infinite_points')
-            layout.prop(self, 'print_progress')
+    def process(self):
 
-        def process(self):
+        if not self.inputs['File Path'].is_linked:
+            return
 
-            if not self.inputs['File Path'].is_linked:
-                return
+        if not self.outputs['Point Cloud'].is_linked:
+            return
 
-            if not self.outputs['Point Cloud'].is_linked:
-                return
+        files_s = self.inputs['File Path'].sv_get()
 
-            files_s = self.inputs['File Path'].sv_get()
-
-            point_clouds_out = []
-            for files in files_s:
-                for file in files:
-                    pcd = o3d.io.read_point_cloud(
-                        file,
-                        remove_nan_points=self.remove_nan_points,
-                        remove_infinite_points=self.remove_infinite_points,
-                        print_progress=self.print_progress)
-                    point_clouds_out.append(pcd)
+        point_clouds_out = []
+        for files in files_s:
+            for file in files:
+                pcd = o3d.io.read_point_cloud(
+                    file,
+                    remove_nan_points=self.remove_nan_points,
+                    remove_infinite_points=self.remove_infinite_points,
+                    print_progress=self.print_progress)
+                point_clouds_out.append(pcd)
 
 
-            self.outputs['Point Cloud'].sv_set(point_clouds_out)
+        self.outputs['Point Cloud'].sv_set(point_clouds_out)
 
 
 
 def register():
-    if o3d is not None:
-        bpy.utils.register_class(SvO3PointCloudImportNode)
+    bpy.utils.register_class(SvO3PointCloudImportNode)
 
 def unregister():
-    if o3d is not None:
-        bpy.utils.unregister_class(SvO3PointCloudImportNode)
+    bpy.utils.unregister_class(SvO3PointCloudImportNode)
