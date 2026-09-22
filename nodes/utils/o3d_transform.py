@@ -176,12 +176,14 @@ class SvO3Transform(bpy.types.Node, SverchCustomTreeNode, SvRecursiveNode):
     def process_data(self, params):
         mesh_out = []
         transformation_mode = self.method
-        geometry_type = type(params[0][0])
+        geometry = params[0][0]
 
-        if geometry_type == o3d.cpu.pybind.geometry.TriangleMesh:
+        if isinstance(geometry, o3d.geometry.TriangleMesh):
             geo_type = 'TRIS'
-        elif geometry_type == o3d.cpu.pybind.geometry.PointCloud:
+        elif isinstance(geometry, o3d.geometry.PointCloud):
             geo_type = 'POINT_CLOUD'
+        else:
+            raise TypeError(f"Unsupported Open3D geometry type: {type(geometry)}")
 
         for mesh, transformation, mask, iterations, coeff in zip(*params):
             new_mesh = copy.deepcopy(mesh)
