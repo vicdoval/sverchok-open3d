@@ -32,6 +32,7 @@ import sverchok_open3d
 from sverchok_open3d import icons
 from sverchok_open3d import settings
 from sverchok_open3d import sockets
+from sverchok_open3d import examples
 from sverchok_open3d.nodes_index import nodes_index
 from sverchok_open3d.utils import show_welcome
 
@@ -134,11 +135,13 @@ def register():
     sockets.register()
 
     register_nodes()
+    examples.register()
     #extra_nodes = importlib.import_module(".nodes", "sverchok_open3d")
     show_welcome()
 
 def unregister():
     global our_menu_classes
+    examples.unregister()
     if 'SVERCHOK_OPEN3D' in nodeitems_utils._node_categories:
         nodeitems_utils.unregister_node_categories("SVERCHOK_OPEN3D")
     for clazz in our_menu_classes:
