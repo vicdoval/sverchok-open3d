@@ -1,5 +1,4 @@
 
-import copy
 import numpy as np
 
 import bpy
@@ -86,13 +85,12 @@ class SvO3TriangleMeshDeformAsRigidNode(bpy.types.Node, SverchCustomTreeNode, Sv
         else:
             energy_mode = o3d.geometry.DeformAsRigidAsPossibleEnergy.Smoothed
         for mesh, vert_index, vert_pos, max_iterations, smoothed_alpha in zip(*params):
-            mesh_new = copy.deepcopy(mesh)
             mesh_new = mesh.deform_as_rigid_as_possible(
-                int_list(np.array(vert_index)),
-                vec_3f(np.array(vert_pos)),
-                max_iterations,
+                int_list(np.asarray(vert_index, dtype=np.int32)),
+                vec_3f(np.asarray(vert_pos, dtype=np.float64)),
+                int(max_iterations),
                 energy=energy_mode,
-                smoothed_alpha=smoothed_alpha)
+                smoothed_alpha=float(smoothed_alpha))
 
             mesh_out.append(mesh_new)
 

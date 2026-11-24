@@ -90,6 +90,18 @@ class SvO3TriangleMeshSamplingNode(bpy.types.Node, SverchCustomTreeNode, SvRecur
 
         for mesh, points_num, seed in zip(*params):
 
+            points_num = int(points_num)
+            seed = int(seed)
+            # Open3D >= 0.16 uses a global RNG rather than per-call seed arguments.
+            random_seed = getattr(getattr(o3d.utility, 'random', None), 'seed', None)
+            if random_seed is not None:
+                if seed >= 0:
+                    random_seed(seed)
+                seed_kwargs = {}
+            else:
+                # Older Open3D releases accept seed directly in both methods.
+                seed_kwargs = {'seed': seed}
+
             if self.normal_method == 'TRIANGLES':
                 use_triangle_normal = True
             elif self.normal_method == 'VERTEX':
@@ -103,12 +115,12 @@ class SvO3TriangleMeshSamplingNode(bpy.types.Node, SverchCustomTreeNode, SvRecur
                     points_num,
                     init_factor=self.init_factor,
                     use_triangle_normal=use_triangle_normal,
-                    seed=seed)
+                    **seed_kwargs)
             else:
                 pcd = mesh.sample_points_uniformly(
                     number_of_points=points_num,
                     use_triangle_normal=use_triangle_normal,
-                    seed=seed)
+                    **seed_kwargs)
             pcd_out.append(pcd)
 
         return pcd_out
