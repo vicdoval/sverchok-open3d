@@ -21,6 +21,7 @@ At the moment, this addon includes the following nodes for Sverchok:
 * *Point Cloud Out*: Point Cloud to Sverchok Data
 * *Point Cloud Downsample*: Reduce density of Point Cloud
   * Point Cloud Outlier Removal: Remove statistical or radius-based outliers from a Point Cloud
+* *Point Cloud Smooth*: Smooth Point Clouds with MLS, Bilateral, Laplacian or Taubin methods
 * *Point Cloud Mask*: Filter parts of a point cloud
 * *Point Cloud Calc Normals*: Calculate Point Cloud normals, offers 'Standard' and 'Tangent Plane' methods
 

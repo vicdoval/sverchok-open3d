@@ -27,6 +27,7 @@ the corresponding Open3D API documentation.
    nodes/point_cloud/point_cloud_join
    nodes/point_cloud/point_cloud_calc_normals
    nodes/point_cloud/point_cloud_outlier_removal
+   nodes/point_cloud/point_cloud_smooth
 
 .. toctree::
    :maxdepth: 2

@@ -11,6 +11,7 @@ def nodes_index():
                     ("point_cloud.point_cloud_out", "SvO3PointCloudOutNode"),
                     ("point_cloud.point_cloud_downsample", "SvO3PointCloudDownSampleNode"),
                     ("point_cloud.point_cloud_outlier_removal", "SvO3PointCloudOutlierRemovalNode"),
+                    ("point_cloud.point_cloud_smooth", "SvO3PointCloudSmoothNode"),
                     ("point_cloud.point_cloud_mask", "SvO3PointCloudMaskNode"),
                     ("point_cloud.point_cloud_join", "SvO3PointCloudJoinNode"),
                     ("point_cloud.point_cloud_calc_normals", "SvO3PointCloudCalcNormalsNode"),
